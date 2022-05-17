@@ -1,0 +1,22 @@
+{
+  "name": "recipebuilder",
+  "version": "1.0.0",
+  "description": "A server for hosting the recipe builder",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "recipe",
+    "recipes",
+    "recipe_builder"
+  ],
+  "author": "Gindick et al.",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mongoose": "^6.3.0",
+    "request": "^2.88.2"
+  }
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('./partials/header') %>
+</header>
+
+<main>
+  <div class="jumbotron">
+    <h1>Recipe Builder</h1>
+    <p>Welcome to Recipe Builder!</p>
+
+    <h2>All Recipes</h2>
+    <ul>
+      <% recipes.forEach(function(recipe) { %>
+        <li>
+          <strong><%= recipe %></strong>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+</main>
+
+<footer>
+    <%- include('./partials/footer') %>
+</footer>
+
+</body>
+</html>
