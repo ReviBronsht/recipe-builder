@@ -7,13 +7,7 @@ import pandas as pd
 from pandas import DataFrame
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
-import json
-import sys
 
-a = sys.argv[1]
-b = sys.argv[2]
-c = sys.argv[3]
-recipe = json.loads(c)
 
 ## Get database for recommendation
 #
@@ -25,15 +19,23 @@ recipeDB = client["precent_recipeDB"]
 recipesCol = recipeDB["recipes"]
 
 #Getting the type of the recipe from the user 
-recipeType = a
+recipeType = "cake"
 
-recipeTitle = b
+recipeTitle = "xxx cake"
+
+recipe = {
+    "normalized_ingredients": ["flour","egg","milk"],
+    "normalized_amounts" : ["25.0 tsp","2.0 tbsp","1.0 tsp"],
+    "directions_keywords" : ["prepare","batter"]
+}
 
 # normalizing user's recipe
 
 last_ingredient = len(recipe["normalized_ingredients"]) - 1 + 3
 
 df = pd.json_normalize(recipe)
+
+print(df.head())
 
 
 # ###### Normalizing the user's recipe to be the same format as the db recipes
@@ -57,7 +59,7 @@ final_df = df
 for column in ["normalized_ingredients", "directions_keywords"]:
          dummies = pd.get_dummies(df[column].explode()).groupby(level = 0).sum()
          final_df[dummies.columns] = dummies
-#print(final_df.head())
+print(final_df.head())
 
 # the get dummies above also marks containing values
 # like for bread crumbs, it will mark that the recipe has both bread and breadcrumbs because bread is in bread crumbs
@@ -80,8 +82,8 @@ for i, row in final_df.iterrows():
 #instead of just if it exists or not
 
 # using two excel tables for conversion rates in the convert_to_tablespoons function
-weight_conv_df = pd.read_excel('C:\\Users\\revib\\Downloads\\Backend\\Backend\\routes\\VolumeTotbs_weight.xlsx')
-unit_conv_df = pd.read_excel('C:\\Users\\revib\\Downloads\\Backend\\Backend\\routes\\VolumeTotbs_units.xlsx')
+weight_conv_df = pd.read_excel('VolumeTotbs_weight.xlsx')
+unit_conv_df = pd.read_excel('VolumeTotbs_units.xlsx')
 
 # function converts every ingredient amount to tablespoons
 def convert_to_tablespoons(amount,ingredient):
@@ -152,10 +154,10 @@ for i, row in final_df.iterrows():
 # this will normalize the data for clustering so its on the right distance from center of cluster
 
 ingredients = final_df.iloc[:, 3:last_ingredient+1]
-#print("last ingredient:", last_ingredient)
-#print("ingredients: ",ingredients.head())
+print("last ingredient:", last_ingredient)
+print("ingredients: ",ingredients.head())
 final_df["sum"] = ingredients.sum(axis=1)
-#print(final_df.head())
+print(final_df.head())
 
 # function to find the precent of something out of the recipe whole
 def find_precent(value,whole):
@@ -173,23 +175,23 @@ for i, row in final_df.iterrows():
         value = row[ingredient]
         if(value != 0.0):
             precent = find_precent(value,whole)
-            #print("precent:",precent)
+            print("precent:",precent)
             final_df.at[i,ingredient] = precent
 
 #delete sum column
 final_df = final_df.iloc[: , :-1]
-#print("final user's recipe normalized:")
-#print(final_df.head())
+print("final user's recipe normalized:")
+print(final_df.head())
 #
 
 #Finds recipes similar to the user's recipe using a find query
 # using regex with options: i to ignore case
 df = DataFrame(list(recipesCol.find({"recipe_title": {"$regex": recipeType,"$options" :'i'}, "rating": { "$gte": 4.5 }})))
-#print(df.head())
-#print(len(df))
-#print(df["recipe_title"].head())
-#print(df["rating"].head())
-#print(df.shape)
+print(df.head())
+print(len(df))
+print(df["recipe_title"].head())
+print(df["rating"].head())
+print(df.shape)
 ##
 
 #adding user's recipe to recipe df
@@ -215,27 +217,27 @@ recipe_columns = final_df.iloc[:, 3:].columns
 # print(recipe_columns)
 
 for col in recipe_columns:
-    #print(final_df[col].values[:][0])
+    print(final_df[col].values[:][0])
     temp_recipe_df[col] = final_df[col].values[:][0]
 
-#print(temp_recipe_df)
-#print("user's ingredients:")
-#print(temp_recipe_df["normalized_ingredients"])
+print(temp_recipe_df)
+print("user's ingredients:")
+print(temp_recipe_df["normalized_ingredients"])
 frames = [temp_recipe_df, df]
 
-#print(len(temp_recipe_df.columns))
-#print(len(df.columns))
+print(len(temp_recipe_df.columns))
+print(len(df.columns))
 
 df.index = df.index + 1  # shifting index
 df = pd.concat(frames)
 df.sort_index(inplace=True) 
-#print(df)
+print(df)
 ####---- Recommendation
 
 
 # Creates a list of important columns for the recommendation engine
 columns = ['normalized_ingredients','directions_keywords']
-#print(df[columns].head(3))
+print(df[columns].head(3))
 #drops nulls if there are any
 # temp_df = df[columns].dropna()
 # print(temp_df.head())
@@ -256,7 +258,7 @@ def get_important_features(df):
 
 #creates column for the important features
 df['important_features'] = get_important_features(df)
-#print(df.head())
+print(df.head())
 
 #converts text to a matrix of token counts
 cm = CountVectorizer().fit_transform(df['important_features'])
@@ -264,8 +266,8 @@ cm = CountVectorizer().fit_transform(df['important_features'])
 # each column and each row will be a recipe, and the value will be how similar it is one to the other
 # so in the center diagonal line the values will be 1, because its the same recipe, and the similarity will be 100%
 cs = cosine_similarity(cm)
-#print(cs)
-#print(cs.shape)
+print(cs)
+print(cs.shape)
 
 
 ##Gets the user's recipe
@@ -277,7 +279,7 @@ recipe_id = 0
 scores = list(enumerate(cs[recipe_id]))
 sorted_scores = sorted(scores, key=lambda x:x[1], reverse=True)
 sorted_scores = sorted_scores[1:]
-#print(sorted_scores)
+print(sorted_scores)
 
 # Uses the first best 3 recipes to find the ingredients the user might be missing, the ingredients the user might
 # want to change their amount, and the directions he might be missing
@@ -292,13 +294,13 @@ def add_amounts(new_list,old_list,recipe,df):
         new_list.append([i, amount])
     return new_list
 
-#print("----")
+print("----")
 recipe_ingredients = df.loc[recipe_id]["normalized_ingredients"]
 recipe_ingredients_amounts = []
 recipe_ingredients_amounts = add_amounts(recipe_ingredients_amounts,recipe_ingredients,recipe_id,df)
 recipe_directions = df.loc[recipe_id]["directions_keywords"]
-#print("user's ingredients: ",recipe_ingredients_amounts)
-#print(" user's directions: ",recipe_directions)
+print("user's ingredients: ",recipe_ingredients_amounts)
+print(" user's directions: ",recipe_directions)
 
 improved_ingredients_temp = []
 improved_directions_temp = []
@@ -354,9 +356,9 @@ new_ingredients = improve_ingredients(new_ingredients,recipe_ingredients,improve
 improved_ingredients = change_amount(improved_ingredients,recipe_ingredients,improved_ingredients_temp)
 improved_directions = improve_directions(improved_directions,recipe_directions,improved_directions_temp)
 
-#print("Suggested ingredients to add to recipe: ",new_ingredients)
-#print("Suggested to change ingredients amount: ",improved_ingredients)
-#print("Suggested directions to improve recipe: ",improved_directions)
+print("Suggested ingredients to add to recipe: ",new_ingredients)
+print("Suggested to change ingredients amount: ",improved_ingredients)
+print("Suggested directions to improve recipe: ",improved_directions)
 ## 
 results = {"new_ingredients":new_ingredients,"improved_ingredients":improved_ingredients,"improved_directions":improved_directions}
 print(results)

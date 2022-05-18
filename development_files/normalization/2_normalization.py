@@ -113,8 +113,8 @@ def convert_to_tablespoons(amount,ingredient):
                     #if didn't find the ingredient, the amount of tbs is the average of all the tbs amounts
                     unit_tbs = 19.212
             tbs_amount = float(amount_num) * unit_tbs
-        else: #case 4
-            tbs_amount = 0.021
+    else: #case 4
+        tbs_amount = 0.021
     return tbs_amount
 
 

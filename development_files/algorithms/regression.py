@@ -1,6 +1,4 @@
 #imports
-import json
-#imports
 import pymongo
 from os import name
 import pandas as pd
@@ -9,18 +7,19 @@ from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LinearRegression
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
-import sys
 
-
-a = sys.argv[1]
-b = sys.argv[2]
-recipe = json.loads(b)
-
-# recipe = b.to_dict()
+recipe = {
+    "normalized_ingredients": ["flour","egg","milk","chocolate"],
+    "normalized_amounts" : ["2.5 tsp","1.0 tbsp","1.0 tsp","0.5 tsp"],
+    "directions_keywords" : ["prepare","batter"]
+}
 
 last_ingredient = len(recipe["normalized_ingredients"]) - 1 + 3
 
 df = pd.json_normalize(recipe)
+
+print(df.head())
+
 
 
 # ###### Normalizing the user's recipe to be the same format as the db recipes
@@ -44,7 +43,7 @@ final_df = df
 for column in ["normalized_ingredients", "directions_keywords"]:
          dummies = pd.get_dummies(df[column].explode()).groupby(level = 0).sum()
          final_df[dummies.columns] = dummies
-#print(final_df.head())
+print(final_df.head())
 
 # the get dummies above also marks containing values
 # like for bread crumbs, it will mark that the recipe has both bread and breadcrumbs because bread is in bread crumbs
@@ -67,8 +66,8 @@ for i, row in final_df.iterrows():
 #instead of just if it exists or not
 
 # using two excel tables for conversion rates in the convert_to_tablespoons function
-weight_conv_df = pd.read_excel('C:\\Users\\revib\\Downloads\\Backend\\Backend\\routes\\VolumeTotbs_weight.xlsx')
-unit_conv_df = pd.read_excel('C:\\Users\\revib\\Downloads\\Backend\\Backend\\routes\\VolumeTotbs_units.xlsx')
+weight_conv_df = pd.read_excel('VolumeTotbs_weight.xlsx')
+unit_conv_df = pd.read_excel('VolumeTotbs_units.xlsx')
 
 # function converts every ingredient amount to tablespoons
 def convert_to_tablespoons(amount,ingredient):
@@ -139,10 +138,10 @@ for i, row in final_df.iterrows():
 # this will normalize the data for clustering so its on the right distance from center of cluster
 
 ingredients = final_df.iloc[:, 3:last_ingredient+1]
-#print("last ingredient:", last_ingredient)
-#print("ingredients: ",ingredients.head())
+print("last ingredient:", last_ingredient)
+print("ingredients: ",ingredients.head())
 final_df["sum"] = ingredients.sum(axis=1)
-#print(final_df.head())
+print(final_df.head())
 
 # function to find the precent of something out of the recipe whole
 def find_precent(value,whole):
@@ -160,12 +159,12 @@ for i, row in final_df.iterrows():
         value = row[ingredient]
         if(value != 0.0):
             precent = find_precent(value,whole)
-            #print("precent:",precent)
+            print("precent:",precent)
             final_df.at[i,ingredient] = precent
 
 #delete sum column
 final_df = final_df.iloc[: , :-1]
-#print(final_df.head())
+print(final_df.head())
 #
 
 #
@@ -184,10 +183,10 @@ recipeType = "cake"
 #Finds recipes similar to the user's recipe using a find query
 # using regex with options: i to ignore case
 df = DataFrame(list(recipesCol.find({"recipe_title": {"$regex": recipeType,"$options" :'i'}})))
-#print(df.head())
-#print(len(df))
-#print(df["recipe_title"].head())
-#print(df["rating"].head())
+print(df.head())
+print(len(df))
+print(df["recipe_title"].head())
+print(df["rating"].head())
 ##
 
 #reg function will perform regression on a target, once to predict recipe rating and once to predict recipe calories
@@ -197,23 +196,23 @@ def reg (target_col):
     target = df[target_col]
     # splitting features to train and test
     X_train, X_test, y_train, y_test = train_test_split(features,target, train_size=0.8,random_state=0)
-    #print("Training size: ", len(X_train), " Test size: ", len(X_test))
+    print("Training size: ", len(X_train), " Test size: ", len(X_test))
 
     # setting recipe df to the same size as database df
     columns = features.columns
-    #print(columns)
+    print(columns)
 
     temp_recipe_df = df.iloc[:1, 20:]
     for col in columns:
         temp_recipe_df[col].values[:] = 0
         
-    #print(temp_recipe_df)
+    print(temp_recipe_df)
 
     recipe_columns = final_df.iloc[:, 3:].columns
     # print(recipe_columns)
 
     for col in recipe_columns:
-        #print(final_df[col].values[:][0])
+        print(final_df[col].values[:][0])
         temp_recipe_df[col] = final_df[col].values[:][0]
 
     # 
@@ -227,7 +226,7 @@ def reg (target_col):
     pcr.fit(X_train, y_train)
     # predicts the model on the test dataset
     predictions = pcr.predict(X_test)
-    #print(len(predictions))
+    print(len(predictions))
 
 
     #tests quality of regression model using mean_squared_error
@@ -239,16 +238,16 @@ def reg (target_col):
     # calculate errors
     errors = mean_squared_error(y_true, y_pred)
 
-    #print("mean squared error =",errors)
+    print("mean squared error =",errors)
 
     #prints results
     results_df = X_test
     results_df[target_col] = y_true
     results_df["pred_rating"] = predictions
-    #print(results_df)
+    print(results_df)
 
     # predicting the recipe's rating
-    #print(temp_recipe_df)
+    print(temp_recipe_df)
     recipe_predictions = pcr.predict(temp_recipe_df)
     return recipe_predictions[0]
 
