@@ -46,8 +46,9 @@ df = DataFrame(list(recipesCol.find({"recipe_title": {"$regex": recipeType,"$opt
 #It runs over all relevant columns and tests amounts of clusters from 2 to 8, runs clustering using fit_predict and 
 #calculates silhouette_score to measure how accurate the clusters are.
 #finds out the amount of clusters for which the silhouette score is the biggest, and returns it.
-x = df.iloc[:, 20:]
+x = df.iloc[:, 21:]
 x["serving_size"] = df["serving_size"]
+x["total_tbs"] = df["total_tbs"]
 # Saves all ingredient + direction names for later
 cols = []
 for col in x.columns:
@@ -62,7 +63,7 @@ lastIngredientCol = x.columns.get_loc("zucchini")
 for col in x.iloc[:, :lastIngredientCol+1]:
     ingredients.append(col)
 directions = []
-for col in x.iloc[:, lastIngredientCol+1:-1]:
+for col in x.iloc[:, lastIngredientCol+1:-2]:
     directions.append(col)
 
 #print("ingredients:", ingredients)
@@ -138,8 +139,11 @@ for i, row in df2.iterrows():
     #print("in the serving size:")
     serving_size = round(row["serving_size"])
     #print(serving_size)
+    #print("with the tbs total:")
+    total_tbs = round(row["total_tbs"])
+    #print(total_tbs)
 
-    results.append({str(i): [{"ingredients": ingredients_array},{"directions":directions_array},{"serving_size": str(serving_size)}]}) 
+    results.append({str(i): [{"ingredients": ingredients_array},{"directions":directions_array},{"serving_size": str(serving_size)},{"total_tbs": str(total_tbs)}]}) 
 
 print(results)
 

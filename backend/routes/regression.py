@@ -53,7 +53,7 @@ for column in ["normalized_ingredients", "directions_keywords"]:
 
 for i, row in final_df.iterrows():
     ingredients = row["normalized_ingredients"]
-    all_ingredients = list(final_df.iloc[:, 20:last_ingredient+1].columns.values)
+    all_ingredients = list(final_df.iloc[:, 21:last_ingredient+1].columns.values)
     for ingredient in all_ingredients:
         if row[ingredient] == 1:
             if (ingredient not in ingredients):
@@ -121,7 +121,7 @@ def convert_to_tablespoons(amount,ingredient):
 
 
 #Changes ingredients columns to float type to show the exact amount
-final_df.iloc[:, 20:last_ingredient+1] =final_df.iloc[:, 20:last_ingredient+1].astype(float)
+final_df.iloc[:, 21:last_ingredient+1] =final_df.iloc[:, 21:last_ingredient+1].astype(float)
 
 #Iterates over every row in the df, and for each row iterates all the ingredients in the names of the ingredients in that recipe
 # it converts the ingredient's amount to tablespoons using convert_to_tablespoons function 
@@ -193,7 +193,7 @@ df = DataFrame(list(recipesCol.find({"recipe_title": {"$regex": recipeType,"$opt
 #reg function will perform regression on a target, once to predict recipe rating and once to predict recipe calories
 def reg (target_col):
     # seperating features from target
-    features = df.iloc[:, 20:]
+    features = df.iloc[:, 21:]
     target = df[target_col]
     # splitting features to train and test
     X_train, X_test, y_train, y_test = train_test_split(features,target, train_size=0.8,random_state=0)
@@ -203,7 +203,7 @@ def reg (target_col):
     columns = features.columns
     #print(columns)
 
-    temp_recipe_df = df.iloc[:1, 20:]
+    temp_recipe_df = df.iloc[:1, 21:]
     for col in columns:
         temp_recipe_df[col].values[:] = 0
         

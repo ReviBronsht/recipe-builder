@@ -28,8 +28,8 @@ print(len(df))
 # Finds whole for each recipe by calculating the sum of the teaspoons for every recipe
 # this will normalize the data for clustering so its on the right distance from center of cluster
 lastIngredientCol = df.columns.get_loc("zucchini")
-print(df.iloc[:, 20:lastIngredientCol+1])
-ingredients = df.iloc[:, 20:lastIngredientCol+1]
+print(df.iloc[:, 21:lastIngredientCol+1])
+ingredients = df.iloc[:, 21:lastIngredientCol+1]
 print(ingredients.head())
 df["sum"] = ingredients.sum(axis=1)
 print(df.head())

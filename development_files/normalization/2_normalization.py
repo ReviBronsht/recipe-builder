@@ -124,12 +124,18 @@ final_df.iloc[:, 20:lastIngredientCol+1] =final_df.iloc[:, 20:lastIngredientCol+
 
 #Iterates over every row in the df, and for each row iterates all the ingredients in the names of the ingredients in that recipe
 # it converts the ingredient's amount to tablespoons using convert_to_tablespoons function 
+
+#final_df["total_tbs"] = 0.0
+final_df.insert(10, "total_tbs", 0.0)
 for i, row in final_df.iterrows():
     amount_num = 1
+    total_tbs = 0.0
     for idx, ingredient in enumerate(row["normalized_ingredients"]):
         amount = row["normalized_amounts"][idx]
         amount_num = convert_to_tablespoons(amount,ingredient)
+        total_tbs = total_tbs + amount_num
         final_df.at[i,ingredient] = row[ingredient] * amount_num
+    final_df.at[i,"total_tbs"] = total_tbs
 #
 
 

@@ -68,7 +68,7 @@ print(final_df.head())
 
 for i, row in final_df.iterrows():
     ingredients = row["normalized_ingredients"]
-    all_ingredients = list(final_df.iloc[:, 20:last_ingredient+1].columns.values)
+    all_ingredients = list(final_df.iloc[:, 21:last_ingredient+1].columns.values)
     for ingredient in all_ingredients:
         if row[ingredient] == 1:
             if (ingredient not in ingredients):
@@ -136,7 +136,7 @@ def convert_to_tablespoons(amount,ingredient):
 
 
 #Changes ingredients columns to float type to show the exact amount
-final_df.iloc[:, 20:last_ingredient+1] =final_df.iloc[:, 20:last_ingredient+1].astype(float)
+final_df.iloc[:, 21:last_ingredient+1] =final_df.iloc[:, 21:last_ingredient+1].astype(float)
 
 #Iterates over every row in the df, and for each row iterates all the ingredients in the names of the ingredients in that recipe
 # it converts the ingredient's amount to tablespoons using convert_to_tablespoons function 
@@ -203,7 +203,7 @@ for col in temp_recipe_df.iloc[:, :13].columns:
     temp_recipe_df[col].values[:] = np.NaN
 for col in temp_recipe_df.iloc[:1, 14:15].columns:
     temp_recipe_df[col].values[:] = [""]
-for col in temp_recipe_df.iloc[:1, 20:].columns:
+for col in temp_recipe_df.iloc[:1, 21:].columns:
     temp_recipe_df[col].values[:] = 0
      
 
