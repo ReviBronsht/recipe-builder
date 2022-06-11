@@ -7,6 +7,9 @@ mongoose = require('mongoose');
 //Running in JSON mode
 app.use(express.json());
 
+//Enable URLparser(express)
+app.use(urlencodedParser);
+
 //DB Connection
 // mongoose.createConnection('mongodb://localhost:27017/precent_recipeDB', {
 //      useNewUrlParser: true,

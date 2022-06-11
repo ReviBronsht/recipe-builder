@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-    export default function RecipeType ({changeRecipe, setExampleRecipes}) {
+    export default function RecipeType ({setStage, changeRecipe, setExampleRecipes}) {
       const [recipeName, setRecipeName] = useState("");
       const [recipeType, setRecipeType] = useState("");
 
@@ -23,6 +23,7 @@ import axios from 'axios'
             console.log(error)
           })
         }
+        setStage(2);
       }
     
   return (

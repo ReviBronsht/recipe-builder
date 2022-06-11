@@ -223,7 +223,7 @@ def reg (target_col):
     # our data has a lot of variables (900+), and many of them are 0
     # So to optimize the regression we'll preform PCA, to reduce the amount of variables to the meaningful ones
 
-    pcr = make_pipeline(PCA(n_components=3), LinearRegression())
+    pcr = make_pipeline(PCA(n_components=100), LinearRegression())
     pcr.fit(X_train, y_train)
     # predicts the model on the test dataset
     predictions = pcr.predict(X_test)
@@ -250,6 +250,6 @@ def reg (target_col):
     # predicting the recipe's rating
     #print(temp_recipe_df)
     recipe_predictions = pcr.predict(temp_recipe_df)
-    return recipe_predictions[0]
+    return round(recipe_predictions[0],2)
 
 print("rating: ", reg("rating"),"calories: ", reg("calories"))

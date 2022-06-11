@@ -29,6 +29,8 @@ recipe = {
     "directions_keywords" : ["prepare","batter"]
 }
 
+size = 79
+
 # normalizing user's recipe
 
 last_ingredient = len(recipe["normalized_ingredients"]) - 1 + 3
@@ -82,8 +84,8 @@ for i, row in final_df.iterrows():
 #instead of just if it exists or not
 
 # using two excel tables for conversion rates in the convert_to_tablespoons function
-weight_conv_df = pd.read_excel('VolumeTotbs_weight.xlsx')
-unit_conv_df = pd.read_excel('VolumeTotbs_units.xlsx')
+weight_conv_df = pd.read_excel('C:\\Users\\revib\\Downloads\\Backend\\development_files\\algorithms\\VolumeToTbs_weight.xlsx')
+unit_conv_df = pd.read_excel('C:\\Users\\revib\\Downloads\\Backend\\development_files\\algorithms\\VolumeToTbs_units.xlsx')
 
 # function converts every ingredient amount to tablespoons
 def convert_to_tablespoons(amount,ingredient):
@@ -294,6 +296,8 @@ def add_amounts(new_list,old_list,recipe,df):
         new_list.append([i, amount])
     return new_list
 
+
+    
 print("----")
 recipe_ingredients = df.loc[recipe_id]["normalized_ingredients"]
 recipe_ingredients_amounts = []
@@ -352,9 +356,25 @@ def change_amount(improved,current,all):
         improved.append([i,row["amount"]])
     return improved
 
+
 new_ingredients = improve_ingredients(new_ingredients,recipe_ingredients,improved_ingredients_temp)
 improved_ingredients = change_amount(improved_ingredients,recipe_ingredients,improved_ingredients_temp)
 improved_directions = improve_directions(improved_directions,recipe_directions,improved_directions_temp)
+
+# convert to normal measurement
+def convert_amounts(ingredient, tbspAmount, ingredientPercentage):
+    ingredientTbsp = tbspAmount * (ingredientPercentage / 100.0)
+    if (ingredientTbsp < 0.3333):
+        return [ingredient, round(ingredientTbsp * 3,1), "tsp"]
+    if (ingredientTbsp >= 4):
+        return [ingredient, round(ingredientTbsp / 16,1), "cup"]
+    return [ingredient, round(ingredientTbsp,1), "tbsp"]
+
+for index, i in enumerate(new_ingredients):
+    new_ingredients[index] = convert_amounts(i[0],size,i[1])
+for index, i in enumerate(improved_ingredients):
+    improved_ingredients[index] = convert_amounts(i[0],size,i[1])
+
 
 print("Suggested ingredients to add to recipe: ",new_ingredients)
 print("Suggested to change ingredients amount: ",improved_ingredients)
@@ -362,6 +382,7 @@ print("Suggested directions to improve recipe: ",improved_directions)
 ## 
 results = {"new_ingredients":new_ingredients,"improved_ingredients":improved_ingredients,"improved_directions":improved_directions}
 print(results)
+
 # ## 
 
 

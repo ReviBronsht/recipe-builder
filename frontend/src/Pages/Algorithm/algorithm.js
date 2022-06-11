@@ -1,16 +1,16 @@
 import RecipeType from './Components/RecipeType'
-import Recipe from './Components/Recipe'
+import RecipeMid from './Components/RecipeMid'
+import RecipeFinal from './Components/RecipeFinal'
 import { useState , useEffect} from 'react'
 import axios from 'axios'
 
 function Algorithm() {
-  
+  const [stage, setStage] = useState(1);
   const [recipeName, setRecipeName] = useState("");
   const [recipeType, setRecipeType] = useState("");
+  const [servingSize, setServingSize] = useState(0);
   const [recipeIngredients, setRecipeIngredients] = useState([]);
   const [recipeDirections, setRecipeDirections] = useState([]);
-  const [changeType, setChangeType] = useState(true);
-  const [showRecs, setShowRecs] = useState(false);
   const [ingredients, setIngredients] = useState(null);
   const [directions, setDirections] = useState(null);
   const [measurements, setMeasurements] = useState(["tbsp","tsp","oz","ounce","fl","qt","pt","gal","lb","ml","kg","cup","gram","liter"]);
@@ -47,11 +47,6 @@ function Algorithm() {
   const changeRecipe = (name,type) => {
     setRecipeName(name);
     setRecipeType(type);
-    setChangeType(!changeType);
-  }
-  //change show recs
-  const changeShowRecs = (value) => {
-    setShowRecs(value);
   }
   //add ingredient to recipe
   const addIngredient = (ingredient) => {
@@ -94,7 +89,6 @@ function Algorithm() {
   const deleteIngredient = (ingredient) => {
      const newList = recipeIngredients.filter((item) => item !== ingredient);
      setRecipeIngredients(newList);
-     removeARec(ingredient[0])
   }
 
     //delete direction
@@ -105,19 +99,36 @@ function Algorithm() {
 
    //get recommendations 
    const getRecs = () => {
-    axios.post('/recipe/recipe-builder',{algorithm:"recommendation",name:recipeName,type:recipeType,recipe_ingredients:recipeIngredients,recipe_directions:recipeDirections})
+    axios.post('/recipe/recipe-builder',{algorithm:"recommendation",name:recipeName,type:recipeType,recipe_ingredients:recipeIngredients,recipe_directions:recipeDirections, serving_size:servingSize[1]})
     .then(response => {
       var result = response.data;
       result = result.replaceAll("'", '"');
       result = JSON.parse(result);
       console.log(result);
-      setDRecs(result.improved_directions);
+
+      var tempRecipe_is = recipeIngredients;
+      
+       var temp_as = result.improved_ingredients;
+       setARecs(temp_as);
+       var curr_is_names = [];
+       for (let i = 0; i < tempRecipe_is.length; i++) {
+             curr_is_names.push(tempRecipe_is[i][0])
+        }
+       for (let i = 0; i < temp_as.length; i++) {
+         if (curr_is_names.includes(temp_as[i][0])) {
+        tempRecipe_is[curr_is_names.indexOf(temp_as[i][0])] = temp_as[i];
+        }
+     }
+      var temp_ds = result.improved_directions;
+      setDRecs(temp_ds);
+      var tempRecipe_ds = recipeDirections;
+      tempRecipe_ds = tempRecipe_ds.concat(temp_ds);
+      setRecipeDirections(tempRecipe_ds);
       var temp_is = result.new_ingredients;
-      temp_is.forEach(i => i.push("tbs"));
       setIRecs(temp_is);
-      var temp_as = result.improved_ingredients;
-      temp_as.forEach(a => a.push("tbs"));
-      setARecs(temp_as);
+      
+      tempRecipe_is = tempRecipe_is.concat(temp_is);
+      setRecipeIngredients(tempRecipe_is);
     })
     .catch(error => {
       console.log(error)
@@ -125,23 +136,7 @@ function Algorithm() {
    }
 
    
-   //remove ingredient rec
-   const removeIRec = (ingredient) => {
-    const newList = ingredientRecs.filter((item) => item !== ingredient);
-    setIRecs(newList);
- }
-
-    //remove direction rec
-    const removeDRec = (direcion) => {
-      const newList = directionRecs.filter((item) => item !== direcion);
-      setDRecs(newList);
-   }
-
-   //remove amount rec
-   const removeARec = (ingredientName) => {
-    const newList = amountRecs.filter((item) => item[0] !== ingredientName);
-    setARecs(newList);
- }
+   
 
    //estimate score
    const estimateScore = () => {
@@ -161,9 +156,37 @@ function Algorithm() {
 
   return (
     <div className="container">
-      {changeType ? <RecipeType setExampleRecipes={setExampleRecipes} changeRecipe={changeRecipe}/> : <button  onClick={() => setChangeType(!changeType)}> Change Recipe </button>}
+      <table style={{width:"100%", backgroundColor:"gray"}}>
+        <tbody>
+          <tr>
+            <td>
+              Enter recipe name and type 
+            </td>
+            <td>
+              Pick serving size & first few ingredients and directions 
+            </td>
+            <td>
+              Adjust and finalize your recipe
+            </td>
+          </tr>
+          <tr>
+            <td style={{textAlign:"center"}}>
+            <input type="radio"  value="" checked={stage >= 2 ? "checked" : ""} />
+            </td>
+            <td style={{textAlign:"center"}}>
+            <input type="radio"  value="" checked={stage >= 3 ? "checked" : ""} />
+            </td>
+            <td style={{textAlign:"center"}}>
+            <input type="radio"  value="" checked={stage >= 4 ? "checked" : ""} />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr />
+      {stage === 1 ? <RecipeType setStage={setStage} setExampleRecipes={setExampleRecipes} changeRecipe={changeRecipe}/> : <button  onClick={() => {window.location.reload(false);}}> Change Recipe </button>}
       <br/>
-      {!changeType ? <Recipe  recipeName={recipeName} recipeType={recipeType} recipeIngredients={recipeIngredients} recipeDirections={recipeDirections} addIngredient={addIngredient} addDirection={addDirection} ingredients={ingredients} directions={directions} changeAmount={changeAmount} measurements={measurements} changeMeasurement={changeMeasurement} deleteIngredient={deleteIngredient} deleteDirection={deleteDirection} score={score} estimateScore={estimateScore} ingredientRecs={ingredientRecs} directionRecs={directionRecs} amountRecs={amountRecs} removeIRec={removeIRec} removeDRec={removeDRec} removeARec={removeARec} getRecs={getRecs} changeShowRecs={changeShowRecs} showRecs={showRecs} exampleRecipes={exampleRecipes}/> : "Please enter a recipe!"}
+      {stage === 2 ? <RecipeMid  setStage={setStage} recipeName={recipeName} recipeType={recipeType} servingSize={servingSize} setServingSize={setServingSize} recipeIngredients={recipeIngredients} recipeDirections={recipeDirections} addIngredient={addIngredient} addDirection={addDirection} ingredients={ingredients} directions={directions} changeAmount={changeAmount} measurements={measurements} changeMeasurement={changeMeasurement} deleteIngredient={deleteIngredient} deleteDirection={deleteDirection} ingredientRecs={ingredientRecs} directionRecs={directionRecs} amountRecs={amountRecs} getRecs={getRecs}  exampleRecipes={exampleRecipes}/> : ""}
+      {stage === 3 ? <RecipeFinal  setStage={setStage} recipeName={recipeName} recipeType={recipeType} servingSize={servingSize} recipeIngredients={recipeIngredients} recipeDirections={recipeDirections} addIngredient={addIngredient} addDirection={addDirection} ingredients={ingredients} directions={directions} changeAmount={changeAmount} measurements={measurements} changeMeasurement={changeMeasurement} deleteIngredient={deleteIngredient} deleteDirection={deleteDirection} score={score} estimateScore={estimateScore} ingredientRecs={ingredientRecs} directionRecs={directionRecs} amountRecs={amountRecs} getRecs={getRecs}  /> : "Please enter a recipe!"}
     </div>
   );
 }

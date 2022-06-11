@@ -130,10 +130,13 @@ for i, row in df2.iterrows():
         if row[col] > 1:
             ingredient = {col:round(row[col],2)}
             ingredients_array.append(ingredient)
+    ingredients_array = sorted(ingredients_array, key=lambda x: list(x.values())[0], reverse=True)[:4]
     #print(ingredients_array)
     for col in directions:
         if row[col] > 0.5:
             directions_array.append(col)
+    directions_array = directions_array[:-2]
+    directions_array = directions_array[:3]
     #print("and is prepared in these ways:")
     #print(directions_array)
     #print("in the serving size:")

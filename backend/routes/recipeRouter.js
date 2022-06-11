@@ -121,6 +121,8 @@ recipeRoutes.post('/recipe-builder', function (req, res) {
     else var ingredients = "";
     if (req.body.recipe_directions) var directions = req.body.recipe_directions;
     else var directions = "";
+    if (req.body.serving_size) var size = req.body.serving_size;
+    else var size = "";
 
     if(algorithm == "clustering"){
     let data1;
@@ -161,7 +163,7 @@ recipeRoutes.post('/recipe-builder', function (req, res) {
             "normalized_amounts": ingredients_amounts,
             "directions_keywords": directions
         }
-        var cmdLineArgs = [type, name, JSON.stringify(recipe)];
+        var cmdLineArgs = [type, name, JSON.stringify(recipe), size];
         var args = cmdLineArgs;
         args.unshift(filePath);
         console.log(args)
@@ -275,6 +277,25 @@ recipeRoutes.post('/all-recipes', function (req, res) {
         }
     }).skip(page).limit(6);
 });
+
+//enables viewing the full recipe details
+recipeRoutes.get('/:recipe_id', function (req, res) {
+    let recipe_id = req.params.recipe_id;
+    if (recipe_id) {
+            recipeModel.findById(recipe_id, function (err, recipe){
+                if (!err) {
+                    res.send(JSON.stringify(recipe));
+                }
+                else {
+                    res.send("Error retrieving the requested recipe");
+                }
+            });
+    }
+    else {
+        res.send("Invalid recipe ID!");
+    }
+});
+
 recipeRoutes.get('/privacy-policy', function (req, res) {
     console.log("Privacy Policy page requested (GET)");
     if (global.runmode == "HTML") {

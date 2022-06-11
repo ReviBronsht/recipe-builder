@@ -14,6 +14,7 @@ a = sys.argv[1]
 b = sys.argv[2]
 c = sys.argv[3]
 recipe = json.loads(c)
+d = sys.argv[4]
 
 ## Get database for recommendation
 #
@@ -29,6 +30,7 @@ recipeType = a
 
 recipeTitle = b
 
+size = d
 # normalizing user's recipe
 
 last_ingredient = len(recipe["normalized_ingredients"]) - 1 + 3
@@ -353,6 +355,20 @@ def change_amount(improved,current,all):
 new_ingredients = improve_ingredients(new_ingredients,recipe_ingredients,improved_ingredients_temp)
 improved_ingredients = change_amount(improved_ingredients,recipe_ingredients,improved_ingredients_temp)
 improved_directions = improve_directions(improved_directions,recipe_directions,improved_directions_temp)
+
+# convert to normal measurement
+def convert_amounts(ingredient, tbspAmount, ingredientPercentage):
+    ingredientTbsp = float(tbspAmount) * (ingredientPercentage / 100.0)
+    if (ingredientTbsp < 0.3333):
+        return [ingredient, round(ingredientTbsp * 3,1), "tsp"]
+    if (ingredientTbsp >= 4):
+        return [ingredient, round(ingredientTbsp / 16,1), "cup"]
+    return [ingredient, round(ingredientTbsp,1), "tbsp"]
+
+for index, i in enumerate(new_ingredients):
+    new_ingredients[index] = convert_amounts(i[0],size,i[1])
+for index, i in enumerate(improved_ingredients):
+    improved_ingredients[index] = convert_amounts(i[0],size,i[1])
 
 #print("Suggested ingredients to add to recipe: ",new_ingredients)
 #print("Suggested to change ingredients amount: ",improved_ingredients)
