@@ -2,13 +2,23 @@ import SearchList from './SearchList'
 import RecipeScore from './RecipeScore'
 import SyncLoader from "react-spinners/SyncLoader";
 
-export default function RecipeFinal({setStage, recipeName, recipeType, servingSize,  recipeIngredients, recipeDirections, ingredients, directions, addIngredient, addDirection, changeAmount,measurements,changeMeasurement,deleteIngredient,deleteDirection,score,estimateScore,ingredientRecs,directionRecs,amountRecs,getRecs}) {
+export default function RecipeFinal({displayIngredients, setStage, recipeName, recipeType, servingSize,  recipeIngredients, recipeDirections, ingredients, directions, addIngredient, addDirection, changeAmount,measurements,changeMeasurement,deleteIngredient,deleteDirection,score,estimateScore,ingredientRecs,directionRecs,amountRecs,getRecs}) {
   
   function handleBuild(e) {
     e.preventDefault();
 
     getRecs();
 }
+
+async function finishBuild() {
+  const response = await displayIngredients();
+  console.log("response recieved");
+
+  const processedResponse = await setStage(4);
+  console.log("finished");
+}
+
+
   return (
     <div>
       {ingredientRecs.length !== 0 ?  <>
@@ -42,7 +52,7 @@ export default function RecipeFinal({setStage, recipeName, recipeType, servingSi
       <br/>
       <hr/>
       <h5>Finish building recipe...</h5>
-      <button onClick={() => {console.log("Ingredients ",recipeIngredients, "direcions", recipeDirections); setStage(4);}}>print recipe</button>
+      <button onClick={() => {console.log("Ingredients ",recipeIngredients, "direcions", recipeDirections); finishBuild();}}>finish building recipe</button>
       </> :  <SyncLoader color="white" size={10} speedMultiplier={0.5} />}
       
     </div>

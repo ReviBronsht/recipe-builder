@@ -75,7 +75,7 @@ for col in x.iloc[:, lastIngredientCol+1:-2]:
 # So to optimize the clustering we'll preform PCA, to reduce the amount of variables to the meaningful ones
 
 
-# # PCA will reduce the 900+ dimensions into 2 dimensions
+# # PCA will reduce the 900+ dimensions into 100 dimensions
 from sklearn.decomposition import PCA
 
 pca = PCA(n_components = 2)

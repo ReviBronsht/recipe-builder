@@ -128,7 +128,7 @@ recipeRoutes.post('/recipe-builder', function (req, res) {
     let data1;
     const { spawn } = require('child_process');
 
-    var filePath = "C:\\Users\\revib\\Downloads\\Backend\\Backend\\routes\\clustering.py";
+    var filePath = __dirname + "\\clustering.py";
     var cmdLineArgs = [type];
     var args = cmdLineArgs;
     args.unshift(filePath);
@@ -157,7 +157,7 @@ recipeRoutes.post('/recipe-builder', function (req, res) {
         let data1;
         const { spawn } = require('child_process');
     
-        var filePath = "C:\\Users\\revib\\Downloads\\Backend\\Backend\\routes\\recommendation.py";
+        var filePath =  __dirname + "\\recommendation.py";
         recipe = {
             "normalized_ingredients": ingredients_names,
             "normalized_amounts": ingredients_amounts,
@@ -192,7 +192,7 @@ recipeRoutes.post('/recipe-builder', function (req, res) {
         let data1;
         const { spawn } = require('child_process');
     
-        var filePath = "C:\\Users\\revib\\Downloads\\Backend\\Backend\\routes\\regression.py";
+        var filePath =  __dirname + "\\regression.py";
         recipe = {
             "normalized_ingredients": ingredients_names,
             "normalized_amounts": ingredients_amounts,

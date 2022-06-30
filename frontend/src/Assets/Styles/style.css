@@ -10464,3 +10464,17 @@ a.text-dark:focus, a.text-dark:hover {
     font-family: Caveat;
     src: url(./Fonts/Caveat-VariableFont_wght.ttf) format('truetype');
 }
+
+textarea {
+    color: white;
+}
+@media print {
+    body {color: black;}
+    textarea {
+        color:#000;
+    }
+
+    .printHidden {
+        display: none;
+    }
+    }

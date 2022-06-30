@@ -9738,12 +9738,6 @@
   "ingredient_name": "bangus"
 },{
   "_id": {
-    "$oid": "6197ec2f5d5dafd520a254e6"
-  },
-  "category": "Fish",
-  "ingredient_name": "eel"
-},{
-  "_id": {
     "$oid": "6197ec2f5d5dafd520a254e7"
   },
   "category": "Fish",

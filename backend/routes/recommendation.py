@@ -1,5 +1,5 @@
 #imports
-from os import name
+import os
 from unittest import result
 import pymongo
 import numpy as np
@@ -82,8 +82,8 @@ for i, row in final_df.iterrows():
 #instead of just if it exists or not
 
 # using two excel tables for conversion rates in the convert_to_tablespoons function
-weight_conv_df = pd.read_excel('C:\\Users\\revib\\Downloads\\Backend\\Backend\\routes\\VolumeTotbs_weight.xlsx')
-unit_conv_df = pd.read_excel('C:\\Users\\revib\\Downloads\\Backend\\Backend\\routes\\VolumeTotbs_units.xlsx')
+weight_conv_df = pd.read_excel(os.path.dirname(os.path.realpath(__file__)) + '\VolumeTotbs_weight.xlsx')
+unit_conv_df = pd.read_excel(os.path.dirname(os.path.realpath(__file__)) +'\VolumeTotbs_units.xlsx')
 
 # function converts every ingredient amount to tablespoons
 def convert_to_tablespoons(amount,ingredient):
@@ -357,13 +357,33 @@ improved_ingredients = change_amount(improved_ingredients,recipe_ingredients,imp
 improved_directions = improve_directions(improved_directions,recipe_directions,improved_directions_temp)
 
 # convert to normal measurement
+
+volume_categories_array = ["Sugar & Sweeteners", "Dairy-Free & Meat Substitutes", "Baking", "Dairy & Eggs", "Beverages","Condiments & Relishes","Dressings & Vinegars","Herbs & Spices","Oils","Sauces, Spreads & Dips","Seasonings & Spice Blends","Soups, Stews & Stocks","Wine, Beer & Spirits"]
+
 def convert_amounts(ingredient, tbspAmount, ingredientPercentage):
+    # find the type of ingredient by its name
+    ingredientsCol = recipeDB["ingredients"]
+    cursor = ingredientsCol.find({"ingredient_name": ingredient})
+    ingredientDBObj = cursor.next()
+    category = ingredientDBObj["category"]
+    #print(category, ingredient)
+    loc_result = weight_conv_df.loc[weight_conv_df['Ingredient']
+                                   == ingredient]
+    isVolume = category in volume_categories_array
+    #print(isVolume)
     ingredientTbsp = float(tbspAmount) * (ingredientPercentage / 100.0)
+    
+    # if isVolume is false, then it's weight
+    if not isVolume:
+        conv_rate = loc_result['tbs'].values[0]
+        return [ingredient, round(ingredientTbsp / conv_rate, 2), "gram"]
+    
+    
     if (ingredientTbsp < 0.3333):
-        return [ingredient, round(ingredientTbsp * 3,1), "tsp"]
+        return [ingredient, round(ingredientTbsp * 3,2), "tsp"]
     if (ingredientTbsp >= 4):
-        return [ingredient, round(ingredientTbsp / 16,1), "cup"]
-    return [ingredient, round(ingredientTbsp,1), "tbsp"]
+        return [ingredient, round(ingredientTbsp / 16,2), "cup"]
+    return [ingredient, round(ingredientTbsp,2), "tbsp"]
 
 for index, i in enumerate(new_ingredients):
     new_ingredients[index] = convert_amounts(i[0],size,i[1])

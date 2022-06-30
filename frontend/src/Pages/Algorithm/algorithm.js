@@ -1,6 +1,7 @@
 import RecipeType from './Components/RecipeType'
 import RecipeMid from './Components/RecipeMid'
 import RecipeFinal from './Components/RecipeFinal'
+import RecipePage from '../Recipe-page/Recipe-page/Recipe-page'
 import { useState , useEffect} from 'react'
 import axios from 'axios'
 
@@ -154,6 +155,17 @@ function Algorithm() {
     })
    }
 
+   // generate finalized ingredients for display 
+   const displayIngredients = () => {
+    var display_ingredients = [1, 2, 3];
+
+    for(var i = 0; i < recipeIngredients.length; i++) {
+      
+      display_ingredients[i] = recipeIngredients[i][1] + " " + recipeIngredients[i][2] + " " + recipeIngredients[i][0];
+    }
+    console.log(recipeIngredients)
+    setRecipeIngredients(display_ingredients); 
+   }
   return (
     <div className="container">
       <table style={{width:"100%", backgroundColor:"gray"}}>
@@ -186,7 +198,8 @@ function Algorithm() {
       {stage === 1 ? <RecipeType setStage={setStage} setExampleRecipes={setExampleRecipes} changeRecipe={changeRecipe}/> : <button  onClick={() => {window.location.reload(false);}}> Change Recipe </button>}
       <br/>
       {stage === 2 ? <RecipeMid  setStage={setStage} recipeName={recipeName} recipeType={recipeType} servingSize={servingSize} setServingSize={setServingSize} recipeIngredients={recipeIngredients} recipeDirections={recipeDirections} addIngredient={addIngredient} addDirection={addDirection} ingredients={ingredients} directions={directions} changeAmount={changeAmount} measurements={measurements} changeMeasurement={changeMeasurement} deleteIngredient={deleteIngredient} deleteDirection={deleteDirection} ingredientRecs={ingredientRecs} directionRecs={directionRecs} amountRecs={amountRecs} getRecs={getRecs}  exampleRecipes={exampleRecipes}/> : ""}
-      {stage === 3 ? <RecipeFinal  setStage={setStage} recipeName={recipeName} recipeType={recipeType} servingSize={servingSize} recipeIngredients={recipeIngredients} recipeDirections={recipeDirections} addIngredient={addIngredient} addDirection={addDirection} ingredients={ingredients} directions={directions} changeAmount={changeAmount} measurements={measurements} changeMeasurement={changeMeasurement} deleteIngredient={deleteIngredient} deleteDirection={deleteDirection} score={score} estimateScore={estimateScore} ingredientRecs={ingredientRecs} directionRecs={directionRecs} amountRecs={amountRecs} getRecs={getRecs}  /> : "Please enter a recipe!"}
+      {stage === 3 ? <RecipeFinal displayIngredients={displayIngredients} setStage={setStage} recipeName={recipeName} recipeType={recipeType} servingSize={servingSize} recipeIngredients={recipeIngredients} recipeDirections={recipeDirections} addIngredient={addIngredient} addDirection={addDirection} ingredients={ingredients} directions={directions} changeAmount={changeAmount} measurements={measurements} changeMeasurement={changeMeasurement} deleteIngredient={deleteIngredient} deleteDirection={deleteDirection} score={score} estimateScore={estimateScore} ingredientRecs={ingredientRecs} directionRecs={directionRecs} amountRecs={amountRecs} getRecs={getRecs}  /> : ""}
+    {stage === 4 ? <RecipePage builtRecipe={{name:recipeName,ingredients:recipeIngredients,directions:recipeDirections}} /> : "Please enter a recipe!"}
     </div>
   );
 }

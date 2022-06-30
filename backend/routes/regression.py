@@ -2,7 +2,7 @@
 import json
 #imports
 import pymongo
-from os import name
+import os
 import pandas as pd
 from pandas import DataFrame
 from sklearn.pipeline import make_pipeline
@@ -67,8 +67,8 @@ for i, row in final_df.iterrows():
 #instead of just if it exists or not
 
 # using two excel tables for conversion rates in the convert_to_tablespoons function
-weight_conv_df = pd.read_excel('C:\\Users\\revib\\Downloads\\Backend\\Backend\\routes\\VolumeTotbs_weight.xlsx')
-unit_conv_df = pd.read_excel('C:\\Users\\revib\\Downloads\\Backend\\Backend\\routes\\VolumeTotbs_units.xlsx')
+weight_conv_df = pd.read_excel(os.path.dirname(os.path.realpath(__file__)) + '\VolumeTotbs_weight.xlsx')
+unit_conv_df = pd.read_excel(os.path.dirname(os.path.realpath(__file__)) + '\VolumeTotbs_units.xlsx')
 
 # function converts every ingredient amount to tablespoons
 def convert_to_tablespoons(amount,ingredient):
@@ -223,7 +223,8 @@ def reg (target_col):
     # our data has a lot of variables (900+), and many of them are 0
     # So to optimize the regression we'll preform PCA, to reduce the amount of variables to the meaningful ones
 
-    pcr = make_pipeline(PCA(n_components=100), LinearRegression())
+    from sklearn.ensemble import ExtraTreesRegressor as regressor
+    pcr = make_pipeline(PCA(n_components=100), regressor( random_state=0))
     pcr.fit(X_train, y_train)
     # predicts the model on the test dataset
     predictions = pcr.predict(X_test)

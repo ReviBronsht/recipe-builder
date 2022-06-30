@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
 export default function Recipes({ recipes }) {
     return (
@@ -11,6 +12,8 @@ export default function Recipes({ recipes }) {
                             <div className="caption">
                                 <h4>{key.recipe_title}</h4>
                                 {key.description}
+                                <br/>
+                                <Link to={"/recipe/" + key._id}><button>to full recipe</button></Link>
                             </div>
                         </div>
                     </div>

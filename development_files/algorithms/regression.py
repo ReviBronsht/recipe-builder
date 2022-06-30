@@ -1,6 +1,6 @@
 #imports
 import pymongo
-from os import name
+import os
 import pandas as pd
 from pandas import DataFrame
 from sklearn.pipeline import make_pipeline
@@ -66,8 +66,8 @@ for i, row in final_df.iterrows():
 #instead of just if it exists or not
 
 # using two excel tables for conversion rates in the convert_to_tablespoons function
-weight_conv_df = pd.read_excel('VolumeTotbs_weight.xlsx')
-unit_conv_df = pd.read_excel('VolumeTotbs_units.xlsx')
+weight_conv_df = pd.read_excel(os.path.dirname(os.path.realpath(__file__)) + "\VolumeTotbs_weight.xlsx")
+unit_conv_df = pd.read_excel(os.path.dirname(os.path.realpath(__file__)) + "\VolumeTotbs_units.xlsx")
 
 # function converts every ingredient amount to tablespoons
 def convert_to_tablespoons(amount,ingredient):

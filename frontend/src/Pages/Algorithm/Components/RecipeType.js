@@ -33,7 +33,7 @@ import axios from 'axios'
       <input type="text" placeholder="Recipe Name" value={recipeName}  onChange={(e) => setRecipeName(e.target.value)} /> 
       <br/>
       <label>Recipe Type: </label>
-      <input type="text" placeholder="Recipe Type" value={recipeType}  onChange={(e) => setRecipeType(e.target.value)} /> 
+      <input type="text" placeholder="Recipe Type" value={recipeType}  onChange={(e) => setRecipeType(e.target.value)} /> (ex. cake, soup, salad..)
       <br/>
       <input type="submit" value="Start building recipe!" />
       </div>

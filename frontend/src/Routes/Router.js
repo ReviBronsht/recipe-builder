@@ -7,6 +7,7 @@ import Algorithm from '../Pages/Algorithm/algorithm'
 import AllRecipes from '../Pages/All-recipes/AllRecipes'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import useFetch from '../useFetch';
+import RecipePage from '../Pages/Recipe-page/Recipe-page/Recipe-page';
 
 function Routes() {
   //const [data, setData] = useState(null);
@@ -35,6 +36,9 @@ function Routes() {
           </Route>
           <Route path="/recipe/privacy-policy">
             <PrivacyPolicy />
+          </Route>
+          <Route path="/recipe/:recipe_id">
+            <RecipePage />
           </Route>
           <Route path="/recipe/about-us">
             <AboutUs />
