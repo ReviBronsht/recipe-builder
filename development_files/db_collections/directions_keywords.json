@@ -2,905 +2,1086 @@
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2555d"
   },
-  "keyword": "aerate"
+  "keyword": "aerate",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2555e"
   },
-  "keyword": "age"
+  "keyword": "age",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2555f"
   },
-  "keyword": "bake"
+  "keyword": "bake",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25560"
   },
-  "keyword": "barbecue"
+  "keyword": "barbecue",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25561"
   },
-  "keyword": "baste"
+  "keyword": "baste",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25562"
   },
-  "keyword": "batter"
+  "keyword": "batter",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25563"
   },
-  "keyword": "beat"
+  "keyword": "beat",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25564"
   },
-  "keyword": "bind"
+  "keyword": "bind",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25565"
   },
-  "keyword": "blacken"
+  "keyword": "blacken",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25566"
   },
-  "keyword": "blanch"
+  "keyword": "blanch",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25567"
   },
-  "keyword": "blend"
+  "keyword": "blend",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25568"
   },
-  "keyword": "boil"
+  "keyword": "boil",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25569"
   },
-  "keyword": "bone"
+  "keyword": "bone",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2556a"
   },
-  "keyword": "braise"
+  "keyword": "braise",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2556b"
   },
-  "keyword": "bread"
+  "keyword": "bread",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2556c"
   },
-  "keyword": "brew"
+  "keyword": "brew",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2556d"
   },
-  "keyword": "broil"
+  "keyword": "broil",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2556e"
   },
-  "keyword": "brown"
+  "keyword": "brown",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2556f"
   },
-  "keyword": "brush"
+  "keyword": "brush",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25570"
   },
-  "keyword": "burn"
+  "keyword": "burn",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25571"
   },
-  "keyword": "butterfly"
+  "keyword": "butterfly",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25572"
   },
-  "keyword": "can"
+  "keyword": "can",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25573"
   },
-  "keyword": "caramelize"
+  "keyword": "caramelize",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25574"
   },
-  "keyword": "char"
+  "keyword": "char",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25575"
   },
-  "keyword": "char-broil"
+  "keyword": "char-broil",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25576"
   },
-  "keyword": "chill"
+  "keyword": "chill",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25577"
   },
-  "keyword": "chop"
+  "keyword": "chop",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25578"
   },
-  "keyword": "chunk"
+  "keyword": "chunk",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25579"
   },
-  "keyword": "churn"
+  "keyword": "churn",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2557a"
   },
-  "keyword": "clarify"
+  "keyword": "clarify",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2557b"
   },
-  "keyword": "coddle"
+  "keyword": "coddle",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2557c"
   },
-  "keyword": "combine"
+  "keyword": "combine",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2557d"
   },
-  "keyword": "congeal"
+  "keyword": "congeal",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2557e"
   },
-  "keyword": "cool"
+  "keyword": "cool",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2557f"
   },
-  "keyword": "core"
+  "keyword": "core",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25580"
   },
-  "keyword": "cream"
+  "keyword": "cream",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25581"
   },
-  "keyword": "cured"
+  "keyword": "cured",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25582"
   },
-  "keyword": "cut"
+  "keyword": "cut",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25583"
   },
-  "keyword": "debone"
+  "keyword": "debone",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25584"
   },
-  "keyword": "decorate"
+  "keyword": "decorate",
+  "type": "finish"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25585"
   },
-  "keyword": "deep fry"
+  "keyword": "deep fry",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25586"
   },
-  "keyword": "deglaze"
+  "keyword": "deglaze",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25587"
   },
-  "keyword": "descale"
+  "keyword": "descale",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25588"
   },
-  "keyword": "devil"
+  "keyword": "devil",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25589"
   },
-  "keyword": "dice"
+  "keyword": "dice",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2558a"
   },
-  "keyword": "dip"
+  "keyword": "dip",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2558b"
   },
-  "keyword": "dough"
+  "keyword": "dough",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2558c"
   },
-  "keyword": "drain"
+  "keyword": "drain",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2558d"
   },
-  "keyword": "drizzle"
+  "keyword": "drizzle",
+  "type": "finish"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2558e"
   },
-  "keyword": "dry"
+  "keyword": "dry",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2558f"
   },
-  "keyword": "escallop"
+  "keyword": "escallop",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25590"
   },
-  "keyword": "ferment"
+  "keyword": "ferment",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25591"
   },
-  "keyword": "fillet"
+  "keyword": "fillet",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25592"
   },
-  "keyword": "filter"
+  "keyword": "filter",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25593"
   },
-  "keyword": "flambe"
+  "keyword": "flambe",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25594"
   },
-  "keyword": "flavor"
+  "keyword": "flavor",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25595"
   },
-  "keyword": "flip"
+  "keyword": "flip",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25596"
   },
-  "keyword": "fold"
+  "keyword": "fold",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25597"
   },
-  "keyword": "freeze"
+  "keyword": "freeze",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25598"
   },
-  "keyword": "French fry"
+  "keyword": "French fry",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25599"
   },
-  "keyword": "fricassee"
+  "keyword": "fricassee",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2559a"
   },
-  "keyword": "frost"
+  "keyword": "frost",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2559b"
   },
-  "keyword": "froth"
+  "keyword": "froth",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2559c"
   },
-  "keyword": "fry"
+  "keyword": "fry",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2559d"
   },
-  "keyword": "garnish"
+  "keyword": "garnish",
+  "type": "finish"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2559e"
   },
-  "keyword": "gel"
+  "keyword": "gel",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2559f"
   },
-  "keyword": "glaze"
+  "keyword": "glaze",
+  "type": "finish"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255a0"
   },
-  "keyword": "grate"
+  "keyword": "grate",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255a1"
   },
-  "keyword": "gratin"
+  "keyword": "gratin",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255a2"
   },
-  "keyword": "grease"
+  "keyword": "grease",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255a3"
   },
-  "keyword": "grill"
+  "keyword": "grill",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255a4"
   },
-  "keyword": "grind"
+  "keyword": "grind",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255a5"
   },
-  "keyword": "hard boil"
+  "keyword": "hard boil",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255a6"
   },
-  "keyword": "harden"
+  "keyword": "harden",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255a7"
   },
-  "keyword": "hash"
+  "keyword": "hash",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255a8"
   },
-  "keyword": "heat"
+  "keyword": "heat",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255a9"
   },
-  "keyword": "hull"
+  "keyword": "hull",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255aa"
   },
-  "keyword": "ice"
+  "keyword": "ice",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255ab"
   },
-  "keyword": "infuse"
+  "keyword": "infuse",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255ac"
   },
-  "keyword": "jell"
+  "keyword": "jell",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255ad"
   },
-  "keyword": "juice"
+  "keyword": "juice",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255ae"
   },
-  "keyword": "julienne"
+  "keyword": "julienne",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255af"
   },
-  "keyword": "knead"
+  "keyword": "knead",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255b0"
   },
-  "keyword": "layer"
+  "keyword": "layer",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255b1"
   },
-  "keyword": "leaven"
+  "keyword": "leaven",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255b2"
   },
-  "keyword": "macerate"
+  "keyword": "macerate",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255b3"
   },
-  "keyword": "marinate"
+  "keyword": "marinate",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255b4"
   },
-  "keyword": "mash"
+  "keyword": "mash",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255b5"
   },
-  "keyword": "measure"
+  "keyword": "measure",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255b6"
   },
-  "keyword": "melt"
+  "keyword": "melt",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255b7"
   },
-  "keyword": "microwave"
+  "keyword": "microwave",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255b8"
   },
-  "keyword": "mix"
+  "keyword": "mix",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255b9"
   },
-  "keyword": "mold"
+  "keyword": "mold",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255ba"
   },
-  "keyword": "oil"
+  "keyword": "oil",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255bb"
   },
-  "keyword": "oven fry"
+  "keyword": "oven fry",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255bc"
   },
-  "keyword": "overcook"
+  "keyword": "overcook",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255bd"
   },
-  "keyword": "pan fry"
+  "keyword": "pan fry",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255be"
   },
-  "keyword": "parboil"
+  "keyword": "parboil",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255bf"
   },
-  "keyword": "pare"
+  "keyword": "pare",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255c0"
   },
-  "keyword": "peel"
+  "keyword": "peel",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255c1"
   },
-  "keyword": "percolate"
+  "keyword": "percolate",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255c2"
   },
-  "keyword": "pickle"
+  "keyword": "pickle",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255c3"
   },
-  "keyword": "pit"
+  "keyword": "pit",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255c4"
   },
-  "keyword": "poach"
+  "keyword": "poach",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255c5"
   },
-  "keyword": "pop"
+  "keyword": "pop",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255c6"
   },
-  "keyword": "pour"
+  "keyword": "pour",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255c7"
   },
-  "keyword": "precook"
+  "keyword": "precook",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255c8"
   },
-  "keyword": "prepare"
+  "keyword": "prepare",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255c9"
   },
-  "keyword": "preserve"
+  "keyword": "preserve",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255ca"
   },
-  "keyword": "press"
+  "keyword": "press",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255cb"
   },
-  "keyword": "pressure-cook"
+  "keyword": "pressure-cook",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255cc"
   },
-  "keyword": "process"
+  "keyword": "process",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255cd"
   },
-  "keyword": "pulp"
+  "keyword": "pulp",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255ce"
   },
-  "keyword": "puree"
+  "keyword": "puree",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255cf"
   },
-  "keyword": "quarter"
+  "keyword": "quarter",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255d0"
   },
-  "keyword": "raw"
+  "keyword": "raw",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255d1"
   },
-  "keyword": "reduce"
+  "keyword": "reduce",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255d2"
   },
-  "keyword": "refrigerate"
+  "keyword": "refrigerate",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255d3"
   },
-  "keyword": "render"
+  "keyword": "render",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255d4"
   },
-  "keyword": "rise"
+  "keyword": "rise",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255d5"
   },
-  "keyword": "roast"
+  "keyword": "roast",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255d6"
   },
-  "keyword": "roll"
+  "keyword": "roll",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255d7"
   },
-  "keyword": "rub"
+  "keyword": "rub",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255d8"
   },
-  "keyword": "salt"
+  "keyword": "salt",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255d9"
   },
-  "keyword": "saute"
+  "keyword": "saute",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255da"
   },
-  "keyword": "scald"
+  "keyword": "scald",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255db"
   },
-  "keyword": "scallop"
+  "keyword": "scallop",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255dc"
   },
-  "keyword": "scoop"
+  "keyword": "scoop",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255dd"
   },
-  "keyword": "score"
+  "keyword": "score",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255de"
   },
-  "keyword": "scramble"
+  "keyword": "scramble",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255df"
   },
-  "keyword": "sear"
+  "keyword": "sear",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255e0"
   },
-  "keyword": "season"
+  "keyword": "season",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255e1"
   },
-  "keyword": "separate"
+  "keyword": "separate",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255e2"
   },
-  "keyword": "serve"
+  "keyword": "serve",
+  "type": "finish"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255e3"
   },
-  "keyword": "shell"
+  "keyword": "shell",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255e4"
   },
-  "keyword": "shirr"
+  "keyword": "shirr",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255e5"
   },
-  "keyword": "shred"
+  "keyword": "shred",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255e6"
   },
-  "keyword": "shuck"
+  "keyword": "shuck",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255e7"
   },
-  "keyword": "sieve"
+  "keyword": "sieve",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255e8"
   },
-  "keyword": "sift"
+  "keyword": "sift",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255e9"
   },
-  "keyword": "simmer"
+  "keyword": "simmer",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255ea"
   },
-  "keyword": "skewer"
+  "keyword": "skewer",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255eb"
   },
-  "keyword": "skim"
+  "keyword": "skim",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255ec"
   },
-  "keyword": "skin"
+  "keyword": "skin",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255ed"
   },
-  "keyword": "slice"
+  "keyword": "slice",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255ee"
   },
-  "keyword": "sliver"
+  "keyword": "sliver",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255ef"
   },
-  "keyword": "slow cook"
+  "keyword": "slow cook",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255f0"
   },
-  "keyword": "smoke"
+  "keyword": "smoke",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255f1"
   },
-  "keyword": "snip"
+  "keyword": "snip",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255f2"
   },
-  "keyword": "soak"
+  "keyword": "soak",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255f3"
   },
-  "keyword": "soft boil"
+  "keyword": "soft boil",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255f4"
   },
-  "keyword": "souse"
+  "keyword": "souse",
+  "type": "finish"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255f5"
   },
-  "keyword": "sprinkle"
+  "keyword": "sprinkle",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255f6"
   },
-  "keyword": "steam"
+  "keyword": "steam",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255f7"
   },
-  "keyword": "steep"
+  "keyword": "steep",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255f8"
   },
-  "keyword": "stew"
+  "keyword": "stew",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255f9"
   },
-  "keyword": "stir"
+  "keyword": "stir",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255fa"
   },
-  "keyword": "stir fry"
+  "keyword": "stir fry",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255fb"
   },
-  "keyword": "strain"
+  "keyword": "strain",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255fc"
   },
-  "keyword": "stuff"
+  "keyword": "stuff",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255fd"
   },
-  "keyword": "sweat"
+  "keyword": "sweat",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255fe"
   },
-  "keyword": "sweeten"
+  "keyword": "sweeten",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a255ff"
   },
-  "keyword": "temper"
+  "keyword": "temper",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25600"
   },
-  "keyword": "tenderize"
+  "keyword": "tenderize",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25601"
   },
-  "keyword": "thicken"
+  "keyword": "thicken",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25602"
   },
-  "keyword": "thin"
+  "keyword": "thin",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25603"
   },
-  "keyword": "toast"
+  "keyword": "toast",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25604"
   },
-  "keyword": "top"
+  "keyword": "top",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25605"
   },
-  "keyword": "toss"
+  "keyword": "toss",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25606"
   },
-  "keyword": "trim"
+  "keyword": "trim",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25607"
   },
-  "keyword": "truss"
+  "keyword": "truss",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25608"
   },
-  "keyword": "turn"
+  "keyword": "turn",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25609"
   },
-  "keyword": "uncured"
+  "keyword": "uncured",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2560a"
   },
-  "keyword": "unmold"
+  "keyword": "unmold",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2560b"
   },
-  "keyword": "warm"
+  "keyword": "warm",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2560c"
   },
-  "keyword": "wash"
+  "keyword": "wash",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2560d"
   },
-  "keyword": "wedge"
+  "keyword": "wedge",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2560e"
   },
-  "keyword": "whip"
+  "keyword": "whip",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a2560f"
   },
-  "keyword": "whisk"
+  "keyword": "whisk",
+  "type": "prepare"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25610"
   },
-  "keyword": "zap"
+  "keyword": "zap",
+  "type": "cook"
 },{
   "_id": {
     "$oid": "6197ec5d5d5dafd520a25611"
   },
-  "keyword": "zest"
+  "keyword": "zest",
+  "type": "prepare"
 }]

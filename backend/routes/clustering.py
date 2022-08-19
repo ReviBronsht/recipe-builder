@@ -78,7 +78,7 @@ for col in x.iloc[:, lastIngredientCol+1:-2]:
 # # PCA will reduce the 900+ dimensions into 100 dimensions
 from sklearn.decomposition import PCA
 
-pca = PCA(n_components = 2)
+pca = PCA(n_components = 3)
 pca.fit(x)
 x_pca=pca.transform(x)
 #print(x_pca)

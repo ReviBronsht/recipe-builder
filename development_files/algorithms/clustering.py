@@ -4,10 +4,13 @@ import pymongo
 import numpy as np
 import pandas as pd
 from pandas import DataFrame
-#from sklearn import linear_model
-#import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
+from sklearn.cluster import KMeans as clustering
 from sklearn.metrics import silhouette_score
+import sys
+#a = sys.argv[1]
+a = "avocado"
+
+# print(a)
 
 # from amounts import amounts_normalize
 
@@ -20,8 +23,8 @@ client = pymongo.MongoClient()
 recipeDB = client["precent_recipeDB"]
 recipesCol = recipeDB["recipes"]
 
-#Getting the type of the recipe from the user 
-recipeType = "chicken"
+# #Getting the type of the recipe from the user 
+recipeType = a
 
 #Finds recipes similar to the user's recipe using a find query
 # using regex with options: i to ignore case
@@ -58,7 +61,7 @@ print("directions index: ",x.iloc[:, lastIngredientCol+1:])
 for col in x.iloc[:, :lastIngredientCol+1]:
     ingredients.append(col)
 directions = []
-for col in x.iloc[:, lastIngredientCol+1:]:
+for col in x.iloc[:, lastIngredientCol+1:-2]:
     directions.append(col)
 
 print("ingredients:", ingredients)
@@ -73,7 +76,7 @@ print("directions", directions)
 # # PCA will reduce the 900+ dimensions into 100 dimensions
 from sklearn.decomposition import PCA
 
-pca = PCA(n_components = 2)
+pca = PCA(n_components = 3)
 pca.fit(x)
 x_pca=pca.transform(x)
 print(x_pca)
@@ -83,7 +86,7 @@ x = x_pca
 
 sil = {}
 for k in range(2,8):
-    kmeans = KMeans(n_clusters=k,random_state=0)
+    kmeans = clustering(n_clusters=k,random_state=0)
     cluster = kmeans.fit_predict(x)
     sil[k] = silhouette_score(x, cluster)
     print("K=",k, ' : ', sil[k])
@@ -97,8 +100,7 @@ for k in range(2,8):
 print("best k is: ", max_k, "and its silhouette score is: ", max_sil)
 
 # using the best silhouette score found earlier, runs clustering and adds cluster number to the df
-kmeans = KMeans(n_clusters=max_k)  
-#print(x.head())
+kmeans = clustering(n_clusters=max_k,random_state=0)  
 f_cluster = kmeans.fit(x)
 
 #Gets average recipe for every cluster using cluster_centers_
@@ -130,9 +132,9 @@ for i, row in df2.iterrows():
     for col in directions:
         if row[col] > 0.5:
             directions_array.append(col)
-    print("and is prepared in these ways:")
     directions_array = directions_array[:-2]
     directions_array = directions_array[:3]
+    print("and is prepared in these ways:")
     print(directions_array)
     print("in the serving size:")
     serving_size = round(row["serving_size"])
@@ -141,7 +143,7 @@ for i, row in df2.iterrows():
     total_tbs = round(row["total_tbs"])
     print(total_tbs)
 
-    results.append({i: [{"ingredients": ingredients_array},{"directions":directions_array},{"serving_size":serving_size},{"total_tbs":total_tbs}]}) 
+    results.append({str(i): [{"ingredients": ingredients_array},{"directions":directions_array},{"serving_size": str(serving_size)},{"total_tbs": str(total_tbs)}]}) 
 
 print(results)
 
@@ -149,4 +151,3 @@ print(results)
 
 
 #
-

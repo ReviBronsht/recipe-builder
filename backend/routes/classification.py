@@ -1,28 +1,37 @@
 #imports
 import json
-#imports
 import pymongo
 import os
 import pandas as pd
+import numpy as np
 from pandas import DataFrame
 from sklearn.pipeline import make_pipeline
-from sklearn.linear_model import LinearRegression
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
+from sklearn.linear_model import SGDClassifier
+from sklearn.metrics import fbeta_score, accuracy_score
 import sys
 
+## classification will tell user if their recipe is good or not
 
+# Getting variables for classification (recipe type and recipe)
 a = sys.argv[1]
 b = sys.argv[2]
 recipe = json.loads(b)
 
-# recipe = b.to_dict()
+# recipe = recipe = {
+#     "normalized_ingredients": ["chocolate"],
+#     "normalized_amounts" : ["1.0 tsp"],
+#     "directions_keywords" : ["bake"]
+# }
+# a = "cake"
+# b= "xxx cake"
 
 last_ingredient = len(recipe["normalized_ingredients"]) - 1 + 3
-
 df = pd.json_normalize(recipe)
 
 
+# -----------------------------------------------------------------------------------------
 # ###### Normalizing the user's recipe to be the same format as the db recipes
 ######
 
@@ -67,8 +76,8 @@ for i, row in final_df.iterrows():
 #instead of just if it exists or not
 
 # using two excel tables for conversion rates in the convert_to_tablespoons function
-weight_conv_df = pd.read_excel(os.path.dirname(os.path.realpath(__file__)) + '\VolumeTotbs_weight.xlsx')
-unit_conv_df = pd.read_excel(os.path.dirname(os.path.realpath(__file__)) + '\VolumeTotbs_units.xlsx')
+weight_conv_df = pd.read_excel(os.path.dirname(os.path.realpath(__file__)) + '\ingredients_weights.xlsx')
+unit_conv_df = pd.read_excel(os.path.dirname(os.path.realpath(__file__)) + '\ingredients_units.xlsx')
 
 # function converts every ingredient amount to tablespoons
 def convert_to_tablespoons(amount,ingredient):
@@ -101,7 +110,7 @@ def convert_to_tablespoons(amount,ingredient):
                 index = weight_measurements.index(amount_measurement)
                 try:
                     #tries to find the conversion rate for the ingredient from the conversion rate by weights df
-                    conv_rate = weight_conv_df.loc[weight_conv_df['Ingredient'] == ingredient]['tbs'].values[0]
+                    conv_rate = weight_conv_df.loc[weight_conv_df['ingredient'] == ingredient]['tbs_in_1_gram'].values[0]
                 except:
                     #if didn't find the ingredient, the conversion rate is the average of all the rates
                     conv_rate = 0.1
@@ -109,7 +118,7 @@ def convert_to_tablespoons(amount,ingredient):
         elif (len(amount_list) == 1): #if list is exactly 1, only amount exists, and its case 3
             try:
                     #tries to find the amount of tablespoons for 1 unit of the ingredient from the excel
-                    unit_tbs = unit_conv_df.loc[unit_conv_df['ingredient'] == ingredient]['tablespoon'].values[0]
+                    unit_tbs = unit_conv_df.loc[unit_conv_df['ingredient'] == ingredient]['tbs_in_1_unit'].values[0]
             except:
                     #if didn't find the ingredient, the amount of tbs is the average of all the tbs amounts
                     unit_tbs = 19.212
@@ -168,8 +177,11 @@ final_df = final_df.iloc[: , :-1]
 #print(final_df.head())
 #
 
+
+# -----------------------------------------------------------------------------------------
+## ############ Classification
 #
-# ## Get database for regression
+# ## Get database for classification
 
 #Using pymongo gets the db and the collection 
 #before it's normalized from mongoDB
@@ -179,7 +191,7 @@ recipeDB = client["precent_recipeDB"]
 recipesCol = recipeDB["recipes"]
 
 #Getting the type of the recipe from the user 
-recipeType = "cake"
+recipeType = a
 
 #Finds recipes similar to the user's recipe using a find query
 # using regex with options: i to ignore case
@@ -187,70 +199,84 @@ df = DataFrame(list(recipesCol.find({"recipe_title": {"$regex": recipeType,"$opt
 #print(df.head())
 #print(len(df))
 #print(df["recipe_title"].head())
+
+# preparing the df for classification
+# creating a new column for good recipes and bad recipes
+# good recipes are all recipes with rating higher than 4.5
+# dividing 1.0-5.0 rating to only 'good recipes' and 'bad recipes' and doing classification instead of regression to improve accuracy
+# of the predictive model by reducing noise or non-linearity in the dataset 
+# ('good recipes' will be given value of 1 and 'bad recipes' will be given value of 0)
+df['isgood'] = np.where(df['rating']>=4.5, 1, 0)
 #print(df["rating"].head())
+#print(df["isgood"].head())
+# deleting recipes with the rating '4' to increase the distance between good recipes and bad recipes
+# because most recipes in the dataset are good recipes
+#print("size before deleting", df.shape)
+df = df[df.rating != 4]
+#print("size after deleting", df.shape)
+
 ##
 
-#reg function will perform regression on a target, once to predict recipe rating and once to predict recipe calories
-def reg (target_col):
+#classification function will predict if the recipe is good or bad
+def classification (target_col):
     # seperating features from target
     features = df.iloc[:, 21:]
+    features = features.iloc[: , :-1]
     target = df[target_col]
+    
+    #print("value count", df["rating"].value_counts())
     # splitting features to train and test
     X_train, X_test, y_train, y_test = train_test_split(features,target, train_size=0.8,random_state=0)
     #print("Training size: ", len(X_train), " Test size: ", len(X_test))
 
-    # setting recipe df to the same size as database df
+    # setting recipe df to the same size as database df, by creating a new empty df with one row with the same structre as the df
     columns = features.columns
     #print(columns)
-
     temp_recipe_df = df.iloc[:1, 21:]
     for col in columns:
         temp_recipe_df[col].values[:] = 0
-        
+    temp_recipe_df = temp_recipe_df.iloc[: , :-1]
     #print(temp_recipe_df)
-
+    
+    # setting the values of the user recipe df to the user's recipe
     recipe_columns = final_df.iloc[:, 3:].columns
-    # print(recipe_columns)
-
+    #print("recipe_cols",recipe_columns)
     for col in recipe_columns:
         #print(final_df[col].values[:][0])
         temp_recipe_df[col] = final_df[col].values[:][0]
-
+    #print(temp_recipe_df)
     # 
     #
-    # fits the linear regression model on the training dataset
-    # usess a pipeline from PCA to linear regression, because 
+    # fits the SGDClassifier model on the training dataset
+    # usess a pipeline from PCA to classification, because 
     # our data has a lot of variables (900+), and many of them are 0
-    # So to optimize the regression we'll preform PCA, to reduce the amount of variables to the meaningful ones
-
-    from sklearn.ensemble import ExtraTreesRegressor as regressor
-    pcr = make_pipeline(PCA(n_components=100), regressor( random_state=0))
+    # So to optimize the classification we'll preform PCA, to reduce the amount of variables to the meaningful ones
+    pcr = make_pipeline(PCA(n_components=10), SGDClassifier())
     pcr.fit(X_train, y_train)
     # predicts the model on the test dataset
     predictions = pcr.predict(X_test)
     #print(len(predictions))
 
 
-    #tests quality of regression model using mean_squared_error
-    from sklearn.metrics import mean_squared_error
+    #tests quality of classification model using accuracy and fbeta scores
     # real value
     y_true = y_test
     # predicted value
     y_pred = predictions
-    # calculate errors
-    errors = mean_squared_error(y_true, y_pred)
-
-    #print("mean squared error =",errors)
-
-    #prints results
+    # calculate scores
+    accuracy = accuracy_score(y_true, y_pred)
+    fbeta = fbeta_score(y_true,y_pred,beta = 0.5)
+    #print("accuracy", accuracy, "fbeta", fbeta)
+    
+    #results
     results_df = X_test
     results_df[target_col] = y_true
     results_df["pred_rating"] = predictions
     #print(results_df)
 
-    # predicting the recipe's rating
+    # predicting the user's recipe's rating
     #print(temp_recipe_df)
     recipe_predictions = pcr.predict(temp_recipe_df)
     return round(recipe_predictions[0],2)
 
-print("rating: ", reg("rating"),"calories: ", reg("calories"))
+print(classification("isgood"))

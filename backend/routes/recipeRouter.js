@@ -10,7 +10,7 @@ recipeRoutes.get('/c', (req, res) => {
     let data1;
     const { spawn } = require('child_process');
 
-    var filePath = "C:\\Users\\revib\\Downloads\\Backend\\Backend\\routes\\regression.py";
+    var filePath = "C:\\Users\\revib\\Downloads\\Backend\\Backend\\routes\\classification.py";
     recipe = {
         "normalized_ingredients": ["flour", "egg", "milk"],
         "normalized_amounts": ["2.5 tsp", "1.0 tbsp", "1.0 tsp", "0.5 tsp"],
@@ -179,7 +179,7 @@ recipeRoutes.post('/recipe-builder', function (req, res) {
         })
     }
 
-    if(algorithm == "regression") {
+    if(algorithm == "classification") {
         var ingredients_names = [];
         var ingredients_amounts = [];
 
@@ -192,7 +192,7 @@ recipeRoutes.post('/recipe-builder', function (req, res) {
         let data1;
         const { spawn } = require('child_process');
     
-        var filePath =  __dirname + "\\regression.py";
+        var filePath =  __dirname + "\\classification.py";
         recipe = {
             "normalized_ingredients": ingredients_names,
             "normalized_amounts": ingredients_amounts,

@@ -1,5 +1,5 @@
 #imports
-from os import name
+import os
 from typing import final
 import pymongo
 import numpy as np
@@ -66,8 +66,8 @@ for i, row in final_df.iterrows():
 #instead of just if it exists or not
 
 # using two excel tables for conversion rates in the convert_to_tablespoons function
-weight_conv_df = pd.read_excel('VolumeTotbs_weight.xlsx')
-unit_conv_df = pd.read_excel('VolumeTotbs_units.xlsx')
+weight_conv_df = pd.read_excel(os.path.dirname(os.path.realpath(__file__)) + '\ingredients_weights.xlsx')
+unit_conv_df = pd.read_excel(os.path.dirname(os.path.realpath(__file__)) + '\ingredients_units.xlsx')
 
 # function converts every ingredient amount to tablespoons
 def convert_to_tablespoons(amount,ingredient):
@@ -100,7 +100,7 @@ def convert_to_tablespoons(amount,ingredient):
                 index = weight_measurements.index(amount_measurement)
                 try:
                     #tries to find the conversion rate for the ingredient from the conversion rate by weights df
-                    conv_rate = weight_conv_df.loc[weight_conv_df['Ingredient'] == ingredient]['tbs'].values[0]
+                    conv_rate = weight_conv_df.loc[weight_conv_df['ingredient'] == ingredient]['tbs_in_1_gram'].values[0]
                 except:
                     #if didn't find the ingredient, the conversion rate is the average of all the rates
                     conv_rate = 0.1
@@ -108,7 +108,7 @@ def convert_to_tablespoons(amount,ingredient):
         elif (len(amount_list) == 1): #if list is exactly 1, only amount exists, and its case 3
             try:
                     #tries to find the amount of tablespoons for 1 unit of the ingredient from the excel
-                    unit_tbs = unit_conv_df.loc[unit_conv_df['ingredient'] == ingredient]['tablespoon'].values[0]
+                    unit_tbs = unit_conv_df.loc[unit_conv_df['ingredient'] == ingredient]['tbs_in_1_unit'].values[0]
             except:
                     #if didn't find the ingredient, the amount of tbs is the average of all the tbs amounts
                     unit_tbs = 19.212
