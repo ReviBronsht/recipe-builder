@@ -5,7 +5,7 @@ import axios from 'axios'
       const [recipeName, setRecipeName] = useState("");
       const [recipeType, setRecipeType] = useState("");
 
-      function submitHandler(e) {
+      function submitHandler(e) { //clustering gets example recipes and possible serving sizes
         e.preventDefault()
         if(recipeName === "" || recipeType === "") {
           alert("Please enter a recipe name and a recipe type")
@@ -27,16 +27,20 @@ import axios from 'axios'
       }
     
   return (
-    <form onSubmit={submitHandler}>
-      <div>
-      <label>Recipe Name: </label>
-      <input type="text" placeholder="Recipe Name" value={recipeName}  onChange={(e) => setRecipeName(e.target.value)} /> 
+    <form onSubmit={submitHandler}> {/** form - user can enter a recipe name and recipe type according to which clustering will run */}
+      <h3 style={{marginLeft:"40%"}}>Build Recipe</h3>
       <br/>
-      <label>Recipe Type: </label>
-      <input type="text" placeholder="Recipe Type" value={recipeType}  onChange={(e) => setRecipeType(e.target.value)} /> (ex. cake, soup, salad..)
-      <br/>
-      <input type="submit" value="Start building recipe!" />
+      <div className='row'>
+        <div className='col-4'>Recipe Name: </div>
+        <div className='col-4' style={{position:"absolute", right:"0px"}}><input  type="text" placeholder="Recipe Name" value={recipeName}  onChange={(e) => setRecipeName(e.target.value)} /></div>
       </div>
+      <div className='row'>
+        <div className='col-4'>Recipe Type: </div>
+        <div className='col-4' style={{position:"absolute", right:"0px"}}><input type="text" placeholder="Recipe Type" value={recipeType}  onChange={(e) => setRecipeType(e.target.value)} /> (ex. cake, soup, salad..)</div>
+      </div>
+      <br/>
+      <br/>
+        <input style={{width:"60%", marginLeft:"20%"}} type="submit" value="Start building recipe!"/>
     </form>
   )
 }

@@ -1,7 +1,7 @@
 import RecipeType from './Components/RecipeType'
 import RecipeMid from './Components/RecipeMid'
 import RecipeFinal from './Components/RecipeFinal'
-import RecipePage from '../Recipe-page/Recipe-page/Recipe-page'
+import RecipePage from '../Recipe-page/Recipe-page'
 import { useState , useEffect} from 'react'
 import axios from 'axios'
 
@@ -21,7 +21,7 @@ function Algorithm() {
   const [amountRecs, setARecs] = useState([]);
   const [exampleRecipes, setExampleRecipes] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => { //on get, gets ingredients and directions from relevant collections in db
     axios.get('/recipe/recipe-builder')
         .then(response => {
             var i_array = [];
@@ -167,39 +167,40 @@ function Algorithm() {
     setRecipeIngredients(display_ingredients); 
    }
   return (
-    <div className="container">
-      <table style={{width:"100%", backgroundColor:"gray"}}>
-        <tbody>
-          <tr>
-            <td>
-              Enter recipe name and type 
-            </td>
-            <td>
-              Pick serving size & first few ingredients and directions 
-            </td>
-            <td>
-              Adjust and finalize your recipe
-            </td>
-          </tr>
-          <tr>
-            <td style={{textAlign:"center"}}>
+    // Psuedo progress bar
+    <div className="container" style={{ margin:"auto"}}>
+      <div className='pb-5'>
+        <div className='row'>
+          <div className='col text-center'>
             <input type="radio"  value="" checked={stage >= 2 ? "checked" : ""} />
-            </td>
-            <td style={{textAlign:"center"}}>
+          </div>
+          <div className='col text-center'>
             <input type="radio"  value="" checked={stage >= 3 ? "checked" : ""} />
-            </td>
-            <td style={{textAlign:"center"}}>
+          </div>
+          <div className='col text-center'>
             <input type="radio"  value="" checked={stage >= 4 ? "checked" : ""} />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <hr />
-      {stage === 1 ? <RecipeType setStage={setStage} setExampleRecipes={setExampleRecipes} changeRecipe={changeRecipe}/> : <button  onClick={() => {window.location.reload(false);}}> Change Recipe </button>}
+          </div>
+        </div>
+
+        <div className='row' >
+          <div className='col text-center'>
+            Enter recipe name and type 
+          </div>
+          <div className='col text-center'>
+            Pick serving size & first few ingredients and directions 
+          </div>
+          <div className='col text-center'>
+            Adjust and finalize your recipe
+          </div>
+        </div>
+      </div>
+      <hr /> <p style={{fontSize:"105%"}}> {/** shows the correct stage in the algorithm building according to the stage user is currently on */}
+      {stage === 1 ? <RecipeType setStage={setStage} setExampleRecipes={setExampleRecipes} changeRecipe={changeRecipe}/> : <button style={{marginLeft:"35%", visibility:stage === 4? "hidden" : "visible"}} onClick={() => {window.location.reload(false);}}> Change Recipe </button>}
       <br/>
       {stage === 2 ? <RecipeMid  setStage={setStage} recipeName={recipeName} recipeType={recipeType} servingSize={servingSize} setServingSize={setServingSize} recipeIngredients={recipeIngredients} recipeDirections={recipeDirections} addIngredient={addIngredient} addDirection={addDirection} ingredients={ingredients} directions={directions} changeAmount={changeAmount} measurements={measurements} changeMeasurement={changeMeasurement} deleteIngredient={deleteIngredient} deleteDirection={deleteDirection} ingredientRecs={ingredientRecs} directionRecs={directionRecs} amountRecs={amountRecs} getRecs={getRecs}  exampleRecipes={exampleRecipes}/> : ""}
       {stage === 3 ? <RecipeFinal displayIngredients={displayIngredients} setStage={setStage} recipeName={recipeName} recipeType={recipeType} servingSize={servingSize} recipeIngredients={recipeIngredients} recipeDirections={recipeDirections} addIngredient={addIngredient} addDirection={addDirection} ingredients={ingredients} directions={directions} changeAmount={changeAmount} measurements={measurements} changeMeasurement={changeMeasurement} deleteIngredient={deleteIngredient} deleteDirection={deleteDirection} score={score} estimateScore={estimateScore} ingredientRecs={ingredientRecs} directionRecs={directionRecs} amountRecs={amountRecs} getRecs={getRecs}  /> : ""}
-    {stage === 4 ? <RecipePage builtRecipe={{name:recipeName,ingredients:recipeIngredients,directions:recipeDirections}} /> : "Please enter a recipe!"}
+    {stage === 4 ? <RecipePage builtRecipe={{name:recipeName,ingredients:recipeIngredients,directions:recipeDirections}} /> : ""}
+    </p>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 import './SearchBar.css';
 
-export default function SearchList({ data, add, title, placeholder }) {
+export default function SearchList({ data, add, title, placeholder }) { // search from list for both ingredients and directions
   const [filteredData, setFilteredData] = useState([]);
 
   const handleFilter = (e) => {

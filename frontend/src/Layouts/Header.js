@@ -1,32 +1,29 @@
-import Menu from './Menu';
 import { Link } from "react-router-dom";
+import logo from '../Assets/Images/logo-white.png'
+
+//display header logo and menu
 function Header() {
     return (
         <div className="text-center">
             <header>
-                <div className="mx-auto">
-                    <nav className="navbar navbar-expand-lg">
-                        <ul className="navbar-nav mr-auto">
+                <div className="row ">
+                    <nav className="navbar navbar-expand-lg navbar-dark">
+                        <Link className="navbar-brand" to="/home"><img src={logo} style={{ width:  "150px"}} alt="Recipe Builder" /></Link>
+                        <ul className="navbar-nav pl-4">
                             <li className="nav-item">
-                                <a  className="fa fa-facebook nav-link" target="_blank" href="https://www.facebook.com/"></a>
+                                <Link className="nav-link" to="/home">Home</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="fa fa-youtube nav-link" target="_blank" href="https://www.youtube.com/"></a>
+                                <Link className="nav-link" to="/about-us">About us</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="fa fa-instagram nav-link" target="_blank" href="https://www.instagram.com/"></a>
+                                <Link className="nav-link" to="/recipe-builder">Recipe Builder</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="fa fa-pinterest nav-link" target="_blank" href="https://www.pinterest.com/"></a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="fa fa-linkedin nav-link" target="_blank" href="https://www.linkedin.com/"></a>
-                            </li>
+                                <Link className="nav-link" to="/all-recipes">All Recipes</Link>
+                            </li>                            
                         </ul>
                     </nav>
-                </div>
-                <div className="row">
-                    <Menu isHeader={true} />
                 </div>
             </header >
         </div >

@@ -1,67 +1,8 @@
 const express = require('express');
 const recipeRoutes = express.Router();
-const request = require('request');
 const recipeModel = require('../models/recipeModel');
 const ingredientsModel = require('../models/ingredientsModel');
 const directionsModel = require('../models/directionsModel');
-
-
-recipeRoutes.get('/c', (req, res) => {
-    let data1;
-    const { spawn } = require('child_process');
-
-    var filePath = "C:\\Users\\revib\\Downloads\\Backend\\Backend\\routes\\classification.py";
-    recipe = {
-        "normalized_ingredients": ["flour", "egg", "milk"],
-        "normalized_amounts": ["2.5 tsp", "1.0 tbsp", "1.0 tsp", "0.5 tsp"],
-        "directions_keywords": ["prepare", "batter"]
-    }
-    var cmdLineArgs = ["soup", JSON.stringify(recipe)];
-    var args = cmdLineArgs;
-    args.unshift(filePath);
-    console.log(args)
-    const pyProg = spawn('python3', args);
-    pyProg.stdout.on('data', function (data) {
-        data1 = data.toString();
-
-    })
-    pyProg.on('close', (code) => {
-        console.log("code", code)
-        console.log(data1);
-        res.send(data1);
-    })
-})
-
-recipeRoutes.get('/b', (req, res) => {
-    let data1;
-    const { spawn } = require('child_process');
-
-    var filePath = "C:\\Users\\revib\\Downloads\\Backend\\Backend\\routes\\recommendation.py";
-    recipe = {
-        "normalized_ingredients": ["flour", "egg", "milk"],
-        "normalized_amounts": ["2.5 tsp", "1.0 tbsp", "1.0 tsp", "0.5 tsp"],
-        "directions_keywords": ["prepare", "batter"]
-    }
-    var cmdLineArgs = ["soup", "soup1", JSON.stringify(recipe)];
-    var args = cmdLineArgs;
-    args.unshift(filePath);
-    console.log(args)
-    const pyProg = spawn('python3', args);
-    pyProg.stdout.on('data', function (data) {
-        data1 = data.toString();
-
-    })
-    pyProg.on('close', (code) => {
-        console.log("code", code)
-        console.log(data1);
-        res.send(data1);
-    })
-})
-
-//Test API
-recipeRoutes.get("/api", (req, res) => {
-    res.json({ message: "Hello from server!" });
-});
 
 //Homepage
 recipeRoutes.get('/', function (req, res) {
@@ -79,11 +20,14 @@ recipeRoutes.get('/', function (req, res) {
     }).limit(5);
 
 });
+
+//Get the recipe builder page
 recipeRoutes.get('/recipe-builder', function (req, res) {
     console.log("recipe-builder requested (GET)");
     let filter = {};
     let res_ingredients = [];
     let res_directions = [];
+    //Get the ingredients and directions from the database
     ingredientsModel.find(filter, function (err, ingredients) {
 
         if (err) {
@@ -105,6 +49,18 @@ recipeRoutes.get('/recipe-builder', function (req, res) {
     });
 });
 
+//Recieves a POST request to the Recipe Builder page:
+/*
+Parameters:
+algorithm: the algorithm to be used for building the recipe
+name: the name of the recipe
+type: the type of the recipe
+recipe_ingredients: the ingredients of the recipe
+recipe_directions: the directions of the recipe
+serving_size: the serving size of the recipe
+The algorithm is then chosen - "clustering" or "recommendation" or "classification"
+The server then launches the appropriate algorithm (python script) as a child process.
+*/
 
 recipeRoutes.post('/recipe-builder', function (req, res) {
     console.log("recipe-builder requested (POST)");
@@ -213,10 +169,11 @@ recipeRoutes.post('/recipe-builder', function (req, res) {
         res.send(data1);
     })
     }
-
 });
+
+//Get the all-recipes page
 recipeRoutes.get('/all-recipes', function (req, res) {
-    console.log("all-recipe requested (GET)");
+    console.log("all-recipes requested (GET)");
 
     let filter = {};
     let maxPage = 0;
@@ -236,6 +193,7 @@ recipeRoutes.get('/all-recipes', function (req, res) {
     }).skip(0).limit(6);
 });
 
+//Recieves a POST reqeust to filter the recipes shown on the all-recipes page
 recipeRoutes.post('/all-recipes', function (req, res) {
     console.log("all-recipe requested (POST)");
     console.log(req.body);
@@ -278,7 +236,7 @@ recipeRoutes.post('/all-recipes', function (req, res) {
     }).skip(page).limit(6);
 });
 
-//enables viewing the full recipe details
+//Enables viewing the full recipe details
 recipeRoutes.get('/:recipe_id', function (req, res) {
     let recipe_id = req.params.recipe_id;
     if (recipe_id) {
@@ -296,6 +254,7 @@ recipeRoutes.get('/:recipe_id', function (req, res) {
     }
 });
 
+//Gets the Privacy Policy page
 recipeRoutes.get('/privacy-policy', function (req, res) {
     console.log("Privacy Policy page requested (GET)");
     if (global.runmode == "HTML") {
@@ -306,6 +265,8 @@ recipeRoutes.get('/privacy-policy', function (req, res) {
         res.json("JSON sent successfully (Privacy Policy)");
     }
 });
+
+//Gets the About us page
 recipeRoutes.get('/about-us', function (req, res) {
     console.log("About us page requested (GET)");
     if (global.runmode == "HTML") {
@@ -316,20 +277,5 @@ recipeRoutes.get('/about-us', function (req, res) {
         res.json("JSON sent successfully (About us)");
     }
 });
-
-//Filter request - TBD
-
-//Delete request - TBD
-
-//Update request - TBD
-
-// recipeRoutes.get('/update/:id', function (req, res) {
-
-// });
-
-// recipeRoutes.get('/add', function (req, res) {
-//     console.log("Recieved a GET request to fetch the 'Add a student' page.");
-//     res.render('add', { degreeArr: degreeArr, selectedDegree: 'ba', baseURL: req.baseUrl });
-// });
 
 module.exports = recipeRoutes;

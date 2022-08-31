@@ -1,3 +1,4 @@
+// about us information 
 function AboutUs() {
     return (
         <div className="center">

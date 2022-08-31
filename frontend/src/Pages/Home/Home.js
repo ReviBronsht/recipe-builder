@@ -1,6 +1,8 @@
-import img1 from '../../Assets/Images/1.jpg'
-import axios from 'axios'
+
+import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
+import noImg from '../../Assets/Images/no-img.jpg';
 
 function Home() {
     const [recipes, setRecipes] = useState(null)
@@ -16,32 +18,30 @@ function Home() {
             });
     }, []);
 
-
-
     return (
-        <div className="">
-            <h1 className="text-center">Welcome</h1>
-            <p className="pb-5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        
+        <div className="text-center">
+            <h1>Welcome!</h1>
+            <p>
+                Text about our website and database <br />
+                Ask the user to choose if he wants to see all recipes or use the algorithm
             </p>
 
-            <h1 className="text-center">How it works?</h1>
-            <p className="pb-5">
-                Id volutpat lacus laoreet non curabitur. In massa tempor nec feugiat nisl pretium fusce. Facilisis mauris sit amet massa vitae tortor condimentum lacinia. In fermentum et sollicitudin ac orci phasellus egestas. Facilisi nullam vehicula ipsum a arcu cursus. Lectus magna fringilla urna porttitor rhoncus dolor purus non enim. Nisi porta lorem mollis aliquam ut porttitor leo. Ultrices sagittis orci a scelerisque purus semper eget duis at. Nulla porttitor massa id neque aliquam vestibulum morbi blandit cursus. Vestibulum lectus mauris ultrices eros in. Lacus suspendisse faucibus interdum posuere lorem. Et malesuada fames ac turpis.
-            </p>
-
-            <h1 className="text-center">Top 5</h1>
+            <h1>Top 5</h1>
+            { /* Show top 5 DB recipes */}
             {recipes !== null ? recipes.map((key, i) => (
                 <div key={i} >
 
-                    <table className='mr-5 ml-3'>
+                    <table className='mr-5 ml-3 text-left'>
                         <tbody>
                         <tr>
                             <td className='caveat-list pr-5'>{i+1}</td>
-                            <td><img src={key.image} className="recipe-image d-inline" /></td>
                             <td>
-                                <h4>{key.recipe_title}</h4>
-                                {key.description}
+                                <img src={key.image !== "NaN" ? key.image : noImg} className="d-inline" style={{ width: "100px" }} />
+                            </td>
+                            <td className='align-top'>
+                                <Link to={"/recipe/" + key._id} className="btn-link"><h4>{key.recipe_title}</h4></Link>
+                                {key.description}                                
                             </td>
                         </tr>
                         </tbody>

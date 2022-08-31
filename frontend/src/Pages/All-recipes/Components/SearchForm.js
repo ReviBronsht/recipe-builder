@@ -26,6 +26,7 @@ export default function SearchForm({ setSearch, setRecipes, avaliableDiets, setC
     }
 
     return (
+        // Search recipe by name or filter by diet
         <div>
             <form onSubmit={submitHandler}>
                 <div className='container'>

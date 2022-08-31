@@ -1,6 +1,6 @@
 import axios from 'axios'
 export default function Pages({currPage,setCurrPage,maxPage,setRecipes,searchQuery,searchDiets}) {
-
+// Prev and next page display by numbers
     function clickPrev (e) {
         e.preventDefault();
         console.log("prev;" , currPage -1);
@@ -28,10 +28,11 @@ export default function Pages({currPage,setCurrPage,maxPage,setRecipes,searchQue
     }
 
   return (
+    // chack what is the current page and display pages number 
     <div>
-      {currPage != 1 ? <button style={{fontSize:"20px"}} onClick={clickPrev}>🠸</button> : ""}
+      {currPage != 1 ? <button className="x-btn" style={{fontSize:"20px"}} onClick={clickPrev}>🠸</button> : ""}
       &nbsp;{currPage}&nbsp; / {maxPage}
-      {currPage != maxPage ? <button style={{fontSize:"20px"}} onClick={clickNext}>🠺</button> : ""}
+      {currPage != maxPage ? <button className="x-btn" style={{fontSize:"20px"}} onClick={clickNext}>🠺</button> : ""}
     </div>
   )
 }

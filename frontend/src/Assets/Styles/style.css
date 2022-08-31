@@ -45,14 +45,15 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 }
 
 body {
-    margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;    
     text-align: left;
     color: #fcfcfc;
-    background-color: rgb(71, 66, 63)
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), 
+        rgba(0, 0, 0, 0.7)), 
+        url('../Images/main.jpg');
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -351,7 +352,6 @@ template {
 .h1, h1 {
     border: none;
     padding: 15px 32px;
-    text-align: left;
     text-decoration: none;
     display: inline-block;
     font-size: 50px;
@@ -470,7 +470,13 @@ hr {
 
 .img-fluid {
     max-width: 100%;
-    height: auto
+    height: 100%;
+    /* Full height */
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .img-thumbnail {
@@ -539,10 +545,8 @@ pre code {
 
 .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+    margin-right: 0;
+    margin-left:0;
     margin-top: 1%;
     margin-bottom: 1%;
 }
@@ -3168,13 +3172,12 @@ a.btn.disabled, fieldset:disabled a.btn {
 }
 
 .btn-link {
-    font-weight: 400;
-    color: #007bff;
-    text-decoration: none
+    color: white;    
+    text-decoration: bold
 }
 
 .btn-link:hover {
-    color: #0056b3;
+    color: white;   
     text-decoration: underline
 }
 
@@ -4675,11 +4678,12 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: rgba(255, 255, 255, .5)
+    color: white
 }
 
 .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
-    color: rgba(255, 255, 255, .75)
+    color: rgba(255, 255, 255, .75); 
+    text-decoration: underline;
 }
 
 .navbar-dark .navbar-nav .nav-link.disabled {
@@ -10356,23 +10360,29 @@ a.text-dark:focus, a.text-dark:hover {
     visibility: hidden !important
 }
 
-.recipe-image {
-    height: 150px;
-    width: 300px;
-    padding: 0;
-    display: inline-block;
-    object-fit: cover;
-}
-
 .caveat-list {
     font-family: caveat;
     font-size: 28pt;
     text-decoration: bold;
 }
 
-.image-gallery {
-    
+.main-image {
+    background: 
+        linear-gradient(0deg, rgba(0, 0, 0, 0.5), 
+        rgba(0, 0, 0, 0.5)), 
+        url('../Images/main.jpg');
+    height: 99vh; 
+    width: auto;
 }
+
+.recipe-image {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 250px;
+    height: 250px;
+}
+
 
 @media print {
     *, ::after, ::before {
@@ -10423,7 +10433,8 @@ a.text-dark:focus, a.text-dark:hover {
     }
 
     .container {
-        min-width: 992px !important
+        min-width: 992px !important;
+        position: relative;
     }
 
     .navbar {
@@ -10477,4 +10488,27 @@ textarea {
     .printHidden {
         display: none;
     }
-    }
+}
+
+button, input[type="submit"] {
+    background-color: white;
+    color: black;
+    border-color: white;
+    border-style: double;
+    font-weight: 500;
+
+}
+
+.x-btn {
+    background-color: transparent;
+    color: white;
+    border-width: 0;
+}
+
+button:hover, input[type="submit"]:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+    transition-delay: 4ms;
+    transition-timing-function: ease;
+    font-size: 105%;
+}
