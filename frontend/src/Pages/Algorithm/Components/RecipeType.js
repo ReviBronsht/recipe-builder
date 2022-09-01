@@ -31,12 +31,12 @@ import axios from 'axios'
       <h3 style={{marginLeft:"40%"}}>Build Recipe</h3>
       <br/>
       <div className='row'>
-        <div className='col-4'>Recipe Name: </div>
-        <div className='col-4' style={{position:"absolute", right:"0px"}}><input  type="text" placeholder="Recipe Name" value={recipeName}  onChange={(e) => setRecipeName(e.target.value)} /></div>
+        <div className='col-4' style={{marginLeft:"20%"}}>Recipe Name: </div>
+        <div className='col-4' style={{position:"absolute", right:"0px",marginRight:"20%"}}><input  type="text" placeholder="Recipe Name" value={recipeName}  onChange={(e) => setRecipeName(e.target.value)} /></div>
       </div>
       <div className='row'>
-        <div className='col-4'>Recipe Type: </div>
-        <div className='col-4' style={{position:"absolute", right:"0px"}}><input type="text" placeholder="Recipe Type" value={recipeType}  onChange={(e) => setRecipeType(e.target.value)} /> (ex. cake, soup, salad..)</div>
+        <div className='col-4' style={{marginLeft:"20%"}}>Recipe Type: </div>
+        <div className='col-4' style={{position:"absolute", right:"0px",marginRight:"20%"}}><input type="text" placeholder="Recipe Type" value={recipeType}  onChange={(e) => setRecipeType(e.target.value)} /> (ex. cake, soup, salad..)</div>
       </div>
       <br/>
       <br/>
