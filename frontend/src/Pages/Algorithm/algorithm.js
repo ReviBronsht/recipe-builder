@@ -15,7 +15,7 @@ function Algorithm() {
   const [ingredients, setIngredients] = useState(null);
   const [directions, setDirections] = useState(null);
   const [measurements, setMeasurements] = useState(["tbsp","tsp","oz","ounce","fl","qt","pt","gal","lb","ml","kg","cup","gram","liter"]);
-  const [score, setScore] = useState("");
+  const [score, setScore] = useState();
   const [ingredientRecs, setIRecs] = useState([]);
   const [directionRecs, setDRecs] = useState([]);
   const [amountRecs, setARecs] = useState([]);
@@ -103,6 +103,7 @@ function Algorithm() {
     axios.post('/recipe/recipe-builder',{algorithm:"recommendation",name:recipeName,type:recipeType,recipe_ingredients:recipeIngredients,recipe_directions:recipeDirections, serving_size:servingSize[1]})
     .then(response => {
       try {
+        
       var result = response.data;
       result = result.replaceAll("'", '"');
       result = JSON.parse(result);
@@ -152,8 +153,14 @@ function Algorithm() {
    const estimateScore = () => {
     axios.post('/recipe/recipe-builder',{algorithm:"classification",name:recipeName,type:recipeType,recipe_ingredients:recipeIngredients,recipe_directions:recipeDirections})
     .then(response => {
-      
+      console.log(response.data)
+      console.log(typeof(response.data))
+      if(typeof(response.data) == 'string') {
+        setScore(0);
+      }
+      else {
        setScore(response.data);
+      }
      
     })
     .catch(error => {
