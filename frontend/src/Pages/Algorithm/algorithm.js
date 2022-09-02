@@ -152,11 +152,8 @@ function Algorithm() {
    const estimateScore = () => {
     axios.post('/recipe/recipe-builder',{algorithm:"classification",name:recipeName,type:recipeType,recipe_ingredients:recipeIngredients,recipe_directions:recipeDirections})
     .then(response => {
-      if(recipeIngredients.length === 0 || recipeDirections.length === 0 ) {
-        alert("Please add ingredients and directions!");
-      }
-      else{let s = Math.floor(Math.random() * 5);
-       setScore(response.data);}
+      
+       setScore(response.data);
      
     })
     .catch(error => {
