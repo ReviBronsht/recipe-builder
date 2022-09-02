@@ -9,15 +9,21 @@ import axios from 'axios'
         e.preventDefault()
         if(recipeName === "" || recipeType === "") {
           alert("Please enter a recipe name and a recipe type")
+          window.location.reload(false);
         }
         else {
           changeRecipe(recipeName,recipeType)
           axios.post('/recipe/recipe-builder',{algorithm:"clustering",name:recipeName,type:recipeType})
           .then(response => {
+            if (response.data == "") {
+              alert("No recipes of this type found")
+          window.location.reload(false);
+            }
+            else {
             var result = response.data;
             result = result.replaceAll("'", '"');
             result = JSON.parse(result);
-           setExampleRecipes(result);
+           setExampleRecipes(result); }
           })
           .catch(error => {
             console.log(error)

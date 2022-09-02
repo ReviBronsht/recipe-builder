@@ -102,10 +102,13 @@ function Algorithm() {
    const getRecs = () => {
     axios.post('/recipe/recipe-builder',{algorithm:"recommendation",name:recipeName,type:recipeType,recipe_ingredients:recipeIngredients,recipe_directions:recipeDirections, serving_size:servingSize[1]})
     .then(response => {
+      try {
       var result = response.data;
       result = result.replaceAll("'", '"');
       result = JSON.parse(result);
       console.log(result);
+   
+      
 
       var tempRecipe_is = recipeIngredients;
       
@@ -130,7 +133,13 @@ function Algorithm() {
       
       tempRecipe_is = tempRecipe_is.concat(temp_is);
       setRecipeIngredients(tempRecipe_is);
-    })
+    
+  }
+  catch {
+    alert("These ingredients don't fit this recipe type. Please select different ingredients.")
+    window.location.reload(false);
+  }
+    }) 
     .catch(error => {
       console.log(error)
     })
