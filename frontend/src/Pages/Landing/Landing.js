@@ -6,11 +6,9 @@ function LandingPage() {
         <div className="text-center">
             <img src={logo} alt="Recipe Builder" /><br />
             <p>
-                Text about our website and database <br />
-                Explain that the user can see all the recipes <br />
-                or choose to use the algorithm <br />
-                Ask the user to choose if he wants to see <br />
-                all recipes or use the algorithm <br />
+               Welcome to recipe builder <br />
+                Build a recipe using our algorithm <br />
+                or choose view all recipes<br />
             </p>
             <p>
                 <Link to="/all-recipes" className="btn btn-outline-light m-2">All recipes</Link>
