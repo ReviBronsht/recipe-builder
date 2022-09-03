@@ -23,8 +23,9 @@ function Home() {
         <div className="text-center">
             <h1>Welcome!</h1>
             <p>
-                Text about our website and database <br />
-                Ask the user to choose if he wants to see all recipes or use the algorithm
+                Welcome to recipe builder <br />
+                Build a recipe using our algorithm <br />
+                or choose view all recipes<br />
             </p>
 
             <h1>Top 5</h1>
