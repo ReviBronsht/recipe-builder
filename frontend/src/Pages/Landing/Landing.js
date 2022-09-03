@@ -6,7 +6,7 @@ function LandingPage() {
         <div className="text-center">
             <img src={logo} alt="Recipe Builder" /><br />
             <p>
-               Welcome to recipe builder <br />
+               Welcome to Recipe Builder <br />
                 Build a recipe using our algorithm <br />
                 or choose view all recipes<br />
             </p>
