@@ -23,7 +23,7 @@ function Home() {
         <div className="text-center">
             <h1>Welcome!</h1>
             <p>
-                Welcome to recipe builder <br />
+                Welcome to Recipe Builder <br />
                 Build a recipe using our algorithm <br />
                 or choose view all recipes<br />
             </p>
