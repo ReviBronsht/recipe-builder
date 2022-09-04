@@ -1,3 +1,7 @@
+GitHub link: https://github.com/NavyBirdComics/recipe-builder
+
+########################################################################################################################
+
 Machine Learning Algorithms: The app uses several algorithms. First, the user enters the type of recipe they'd like to make. Then a clustering algorithm runs to find unique recipes from that type (using cluster_centers). The clustering algorithm outputs suggestions for possible recipes and possible serving sizes. The user then picks a serving size and enters the first ingredients/directions. Then the recommendation algorithms run to generate a recipe according to the entered ingredients/directions, recipe type and serving size. Finally, a regression algorithm runs to rate the user's recipe
 
 Clustering: The clustering algorithm runs on the recipes of the same type as the user's recipe that got a good rating (>4.5). It finds possible recipes by creating clusters from found recipes, and uses cluster_centers to find the average recipe from each cluster. It returns those recipes' ingredients and directions to give suggestions to the user, and their serving sizes to allow the user to choose a logical serving size for their recipe.
