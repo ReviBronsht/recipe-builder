@@ -1,5 +1,7 @@
 GitHub link: https://github.com/ReviBronsht/recipe-builder
 
+Recipe builder web app that uses Machine Learning algorithms to generate recipes for users
+The user enters the type of recipe he wants to make and the app suggest recommendations and serving sizes using clustering. User picks a serving size and a few ingredients/directions and the app completes
 ########################################################################################################################
 
 Machine Learning Algorithms: The app uses several algorithms. First, the user enters the type of recipe they'd like to make. Then a clustering algorithm runs to find unique recipes from that type (using cluster_centers). The clustering algorithm outputs suggestions for possible recipes and possible serving sizes. The user then picks a serving size and enters the first ingredients/directions. Then the recommendation algorithms run to generate a recipe according to the entered ingredients/directions, recipe type and serving size. Finally, a regression algorithm runs to rate the user's recipe
