@@ -1,4 +1,4 @@
-GitHub link: https://github.com/NavyBirdComics/recipe-builder
+GitHub link: https://github.com/ReviBronsht/recipe-builder
 
 ########################################################################################################################
 
