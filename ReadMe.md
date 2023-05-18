@@ -71,3 +71,15 @@ We use MongoDB database because of its flexible schema which makes it easy to ev
 During the normalization (three normalization files), the ingredients and directions keywords collections are used to fetch ingredients names and directions from the scraped recipes. Ingredients amounts are fetched using common amount keywords.
 
 Finally, it normalizes the ingredients amounts to the same scale by calculating the precentage of their volume from the total recipe. It does so by first converting every amount to tablespoons (ingredients measured by volume get converted directly, ingredients measured by weight or unit get converted using conversion tables gotten from MapReduce and other websites)
+
+
+![image](https://github.com/ReviBronsht/recipe-builder/assets/97298035/9b3b3ce4-8619-4f53-b47e-4416b03e53a5)
+![image](https://github.com/ReviBronsht/recipe-builder/assets/97298035/b401d4ee-c5fc-4c14-831c-6fc17e652c23)
+![image](https://github.com/ReviBronsht/recipe-builder/assets/97298035/9de63962-44a4-4a91-bbc3-e236ff20060a)
+![image](https://github.com/ReviBronsht/recipe-builder/assets/97298035/86466dbe-6936-48b8-9990-0d91666cf5a2)
+![image](https://github.com/ReviBronsht/recipe-builder/assets/97298035/ed73df31-3019-41c9-8d44-7d35b5d7067a)
+![image](https://github.com/ReviBronsht/recipe-builder/assets/97298035/692685c6-aafc-42a2-8ad4-77296ac02050)
+![image](https://github.com/ReviBronsht/recipe-builder/assets/97298035/af079439-dcdb-469f-9213-acb0b2ed5776)
+
+
+
