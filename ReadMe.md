@@ -2,9 +2,13 @@ GitHub link: https://github.com/ReviBronsht/recipe-builder
 
 Recipe builder web app that uses Machine Learning algorithms to generate recipes for users
 The user enters the type of recipe he wants to make and the app suggest recommendations and serving sizes using clustering. User picks a serving size and a few ingredients/directions and the app completes
-########################################################################################################################
 
-Machine Learning Algorithms: The app uses several algorithms. First, the user enters the type of recipe they'd like to make. Then a clustering algorithm runs to find unique recipes from that type (using cluster_centers). The clustering algorithm outputs suggestions for possible recipes and possible serving sizes. The user then picks a serving size and enters the first ingredients/directions. Then the recommendation algorithms run to generate a recipe according to the entered ingredients/directions, recipe type and serving size. Finally, a regression algorithm runs to rate the user's recipe
+Machine Learning and web scraping in Python, backend in Nodejs and Express, frontend in React, MongoDB database 
+############################################################################################################
+
+Machine Learning Algorithms
+
+The app uses several algorithms. First, the user enters the type of recipe they'd like to make. Then a clustering algorithm runs to find unique recipes from that type (using cluster_centers). The clustering algorithm outputs suggestions for possible recipes and possible serving sizes. The user then picks a serving size and enters the first ingredients/directions. Then the recommendation algorithms run to generate a recipe according to the entered ingredients/directions, recipe type and serving size. Finally, a regression algorithm runs to rate the user's recipe
 
 Clustering: The clustering algorithm runs on the recipes of the same type as the user's recipe that got a good rating (>4.5). It finds possible recipes by creating clusters from found recipes, and uses cluster_centers to find the average recipe from each cluster. It returns those recipes' ingredients and directions to give suggestions to the user, and their serving sizes to allow the user to choose a logical serving size for their recipe.
 
@@ -32,7 +36,7 @@ classification refers to a predictive modeling problem where a class label is pr
 
 ########################################################################################################################
 
-The Server (backend):
+The Server (backend)
 
 Initialization: Using the terminal, make sure to first cd into the backend directory. To start the server, use the following command: npm start. Contingent upon starting up the client (frontend) concurrently, the server will start serving requests from the client. The server is initialized either on the port defined as an environment variable PORT or 3001.
 
@@ -44,7 +48,9 @@ Mongoose Models: Three models are utilized in this project: directionsModel, ing
 
 ########################################################################################################################
 
-The Client (frontend): By default, the user would start at the landing page which includes a short description about the website and 2 buttons: to the "all recipes" page and to the "recipe builder" page.
+The Client (frontend)
+
+By default, the user would start at the landing page which includes a short description about the website and 2 buttons: to the "all recipes" page and to the "recipe builder" page.
 
 "all recipe" page: fetch all of the db's recipes.
 "recipe builder" page: use the algorithm. This page shows the correct form according to the user's stage in the recipe build process and calls for algorithms accordingly.
@@ -54,7 +60,7 @@ The frontend uses Axios to send async HTTP requests to the backend.
 
 ########################################################################################################################
 
-The Scrapers:
+The Scrapers
 
 The Scraper for Obtaining Recipes from the Site atkins.com: Generally speaking, the script systematically goes over each and every one of the pages within a particular category (i.e. diet). To reduce points of failure, the category to be scraped must be enabled manually.
 
@@ -66,7 +72,7 @@ The Scraper for Obtaining Cooking Keywords from the Site enchantedlearning.com
 
 All scrapers are written in Python and use Selenium with Chrome driver. The final result is saved locally to a JSON file. ########################################################################################################################
 
-Normalization & DB:
+Normalization & DB
 
 We use MongoDB database because of its flexible schema which makes it easy to evolve the data format and make it easy to program with. In the database, we store the recipes collection, as well as the directions keywords and ingredients (cooking keywords).
 
