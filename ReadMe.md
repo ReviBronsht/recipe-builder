@@ -1,7 +1,9 @@
+### recipe-builder
+
 GitHub link: https://github.com/ReviBronsht/recipe-builder
 
 #### Recipe builder web app that uses Machine Learning algorithms to generate recipes for users
-The user enters the type of recipe he wants to make and the app suggest recommendations and serving sizes using clustering. User picks a serving size and a few ingredients/directions and the app completes
+#### The user enters the type of recipe he wants to make and the app suggest recommendations and serving sizes using clustering. User picks a serving size and a few ingredients/directions and the app completes
 
 #### Machine Learning and web scraping in Python, backend in Nodejs and Express, frontend in React, MongoDB database 
 <hr>
